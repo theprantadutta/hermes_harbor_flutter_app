@@ -21,13 +21,18 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
   loading_animation_widget: ^1.2.1
+  lint_staged: ^0.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  husky: ^0.1.7
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
+
+lint_staged:
+  "lib/**.dart": dart format --fix && dart fix --apply
