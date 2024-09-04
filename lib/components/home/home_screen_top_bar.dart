@@ -9,9 +9,6 @@ class HomeScreenTopBar extends StatelessWidget {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.06,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      decoration: BoxDecoration(
-          // color: kPrimaryColor.withOpacity(0.05),
-          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -21,7 +18,7 @@ class HomeScreenTopBar extends StatelessWidget {
                 'assets/hermes_harbor_small_logo_transparent.png',
                 fit: BoxFit.contain,
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 10),
               Text(
                 'Hermes Harbor',
                 style: TextStyle(
