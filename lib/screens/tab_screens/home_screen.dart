@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes_harbor_flutter_app/components/home/home_screen_top_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   static const kRouteName = '/home';
@@ -6,8 +7,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Home Screen'),
+    return SafeArea(
+      child: Column(
+        children: [
+          HomeScreenTopBar(),
+        ],
+      ),
     );
   }
 }
