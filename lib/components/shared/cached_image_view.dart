@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class HomeScreenCachedImage extends StatelessWidget {
+class CachedImageView extends StatelessWidget {
   final String imageUrl;
   final double height;
   final double width;
   final BoxShape boxShape;
   final EdgeInsets margin;
 
-  const HomeScreenCachedImage({
+  const CachedImageView({
     super.key,
     required this.imageUrl,
     required this.height,
@@ -41,7 +41,7 @@ class HomeScreenCachedImage extends StatelessWidget {
         margin: margin,
         height: height,
         width: width,
-        child: Icon(
+        child: const Icon(
           Icons.error,
           size: 100,
           color: Colors.red,
@@ -67,12 +67,12 @@ class HomeScreenCachedImage extends StatelessWidget {
   }
 }
 
-class HomeScreenCachedImageSkeletor extends StatelessWidget {
+class CachedImageViewSkeletor extends StatelessWidget {
   final double width;
   final double height;
   final EdgeInsets margin;
 
-  const HomeScreenCachedImageSkeletor({
+  const CachedImageViewSkeletor({
     super.key,
     required this.width,
     required this.height,

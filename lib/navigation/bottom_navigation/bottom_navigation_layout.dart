@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hermes_harbor_flutter_app/navigation/bottom_navigation/awesome_bottom_bar/awesome_bottom_bar_inspired_fancy.dart';
 
 import '../../constants/selectors.dart';
-import 'top_level_page_view.dart';
 import 'top_level_pages.dart';
 
 class BottomNavigationLayout extends StatefulWidget {
@@ -43,18 +42,21 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
   }
 
   void _updateCurrentPageIndex(int index) {
-    pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
+    setState(() {
+      selectedIndex = index;
+    });
+    // pageController.animateToPage(
+    //   index,
+    //   duration: const Duration(milliseconds: 400),
+    //   curve: Curves.easeInOut,
+    // );
   }
 
-  void _handlePageViewChanged(int currentPageIndex) {
-    setState(() {
-      selectedIndex = currentPageIndex;
-    });
-  }
+  // void _handlePageViewChanged(int currentPageIndex) {
+  //   setState(() {
+  //     selectedIndex = currentPageIndex;
+  //   });
+  // }
 
   gotoPage(int index) {
     if (index < kTopLevelPages.length && index >= 0) {
@@ -136,10 +138,11 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
         resizeToAvoidBottomInset: false,
         body: AnnotatedRegion(
           value: getDefaultSystemUiStyle(isDarkTheme),
-          child: TopLevelPageView(
-            pageController: pageController,
-            onPageChanged: _handlePageViewChanged,
-          ),
+          // child: TopLevelPageView(
+          //   pageController: pageController,
+          //   onPageChanged: _handlePageViewChanged,
+          // ),
+          child: kTopLevelPages[selectedIndex],
         ),
         extendBody: false,
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -7,7 +7,7 @@ class HomeScreenTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final kPrimaryColor = Theme.of(context).primaryColor;
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.06,
+      height: MediaQuery.sizeOf(context).height * 0.05,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -19,7 +19,7 @@ class HomeScreenTopBar extends StatelessWidget {
                 fit: BoxFit.contain,
               ),
               const SizedBox(width: 10),
-              Text(
+              const Text(
                 'Hermes Harbor',
                 style: TextStyle(
                   fontSize: 18,

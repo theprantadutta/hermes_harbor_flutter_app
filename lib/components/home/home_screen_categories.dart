@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'home_screen_cached_image.dart';
+import 'package:hermes_harbor_flutter_app/components/shared/cached_image_view.dart';
+import 'package:hermes_harbor_flutter_app/components/shared/section_title_with_see_all.dart';
 
 class HomeScreenCategories extends StatelessWidget {
   const HomeScreenCategories({super.key});
@@ -8,33 +8,16 @@ class HomeScreenCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Shop by Category',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                ),
-              ),
-              Text(
-                'See All',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
+          const SectionTitleWithSeeAll(title: 'Shop by Category'),
+          const SizedBox(height: 5),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.145,
+            height: MediaQuery.sizeOf(context).height * 0.12,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
@@ -43,15 +26,15 @@ class HomeScreenCategories extends StatelessWidget {
                   margin: EdgeInsets.only(
                     right: index == 9 ? 0 : 3,
                   ),
-                  child: Column(
+                  child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      HomeScreenCachedImage(
+                      CachedImageView(
                         width: 60,
                         height: 60,
                         boxShape: BoxShape.circle,
-                        margin: const EdgeInsets.symmetric(horizontal: 3),
+                        margin: EdgeInsets.symmetric(horizontal: 3),
                         imageUrl:
                             'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?cs=srgb&dl=pexels-chloekalaartist-1043474.jpg&fm=jpg&w=640&h=910',
                       ),
