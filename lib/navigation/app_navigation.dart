@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/account_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/favourites_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/wishlist_screen.dart';
+import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 
 import '../screens/login_screen.dart';
 import '../screens/tab_screens/cart_screen.dart';
@@ -179,15 +180,15 @@ class AppNavigation {
         ],
       ),
 
-      // /// Notices
-      // GoRoute(
-      //   parentNavigatorKey: rootNavigatorKey,
-      //   path: NoticeScreen.route,
-      //   name: "Notices",
-      //   builder: (context, state) => NoticeScreen(
-      //     key: state.pageKey,
-      //   ),
-      // ),
+      /// View all Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: ViewAllScreen.kRouteName,
+        name: "Notices",
+        builder: (context, state) => ViewAllScreen(
+          key: state.pageKey,
+        ),
+      ),
 
       // /// Notice Details
       // GoRoute(

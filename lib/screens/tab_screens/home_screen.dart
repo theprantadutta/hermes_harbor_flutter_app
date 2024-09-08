@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hermes_harbor_flutter_app/components/home/home_screen_categories.dart';
-import 'package:hermes_harbor_flutter_app/components/home/home_screen_products.dart';
 import 'package:hermes_harbor_flutter_app/components/home/home_screen_top_bar.dart';
 import 'package:hermes_harbor_flutter_app/components/shared/cached_image_view.dart';
+
+import '../../components/shared/horizontal_product_view.dart';
 
 class HomeScreen extends StatelessWidget {
   static const kRouteName = '/home';
@@ -25,7 +26,14 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const HomeScreenCategories(),
-            const HomeScreenProducts(),
+            // Curated For you
+            const HorizontalProductView(
+              title: 'Curated for you',
+            ),
+            // Popular Products
+            const HorizontalProductView(
+              title: 'Popular Products',
+            ),
           ],
         ),
       ),
