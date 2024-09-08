@@ -184,7 +184,7 @@ class AppNavigation {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: ViewAllScreen.kRouteName,
-        name: "Notices",
+        name: "View All",
         builder: (context, state) => ViewAllScreen(
           key: state.pageKey,
         ),

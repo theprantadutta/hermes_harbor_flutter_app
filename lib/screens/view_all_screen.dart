@@ -4,8 +4,8 @@ import 'package:hermes_harbor_flutter_app/components/shared/page_title_with_back
 import 'package:hermes_harbor_flutter_app/components/view_all/products_filter.dart';
 
 import '../components/layouts/main_layout.dart';
+import '../components/shared/vertical_products_view.dart';
 import '../components/view_all/search_product_field.dart';
-import '../components/view_all/vertical_products_view.dart';
 
 class ViewAllScreen extends StatelessWidget {
   static const kRouteName = '/view-all-screen';

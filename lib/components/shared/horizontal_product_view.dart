@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:hermes_harbor_flutter_app/components/shared/section_title_with_see_all.dart';
 
@@ -20,8 +21,11 @@ class HorizontalProductView extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
-              itemBuilder: (context, index) => SingleProductView(
-                index: index,
+              itemBuilder: (context, index) => FadeInUp(
+                from: index * 50,
+                child: SingleProductView(
+                  index: index,
+                ),
               ),
             ),
           ),
