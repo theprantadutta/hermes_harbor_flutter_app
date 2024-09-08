@@ -27,8 +27,11 @@ class HomeScreen extends StatelessWidget {
             ),
             const HomeScreenCategories(),
             // Curated For you
-            const HorizontalProductView(
-              title: 'Curated for you',
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              child: HorizontalProductView(
+                title: 'Curated for you',
+              ),
             ),
             // Popular Products
             const HorizontalProductView(

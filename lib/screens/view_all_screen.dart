@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hermes_harbor_flutter_app/components/shared/categories_view.dart';
 import 'package:hermes_harbor_flutter_app/components/shared/page_title_with_back.dart';
 import 'package:hermes_harbor_flutter_app/components/view_all/products_filter.dart';
-import 'package:hermes_harbor_flutter_app/components/view_all/vertical_products_view.dart';
 
+import '../components/layouts/main_layout.dart';
 import '../components/view_all/search_product_field.dart';
+import '../components/view_all/vertical_products_view.dart';
 
 class ViewAllScreen extends StatelessWidget {
   static const kRouteName = '/view-all-screen';
@@ -13,7 +14,7 @@ class ViewAllScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MainLayout(
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

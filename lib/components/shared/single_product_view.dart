@@ -13,12 +13,8 @@ class SingleProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.3,
       width: MediaQuery.sizeOf(context).width * 0.5,
       margin: const EdgeInsets.only(right: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

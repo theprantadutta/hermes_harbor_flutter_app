@@ -16,7 +16,7 @@ class HorizontalProductView extends StatelessWidget {
           SectionTitleWithSeeAll(title: title),
           const SizedBox(height: 15),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.38,
+            height: MediaQuery.sizeOf(context).height * 0.32,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
