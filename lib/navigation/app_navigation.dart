@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hermes_harbor_flutter_app/screens/product_detail.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/account_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/favourites_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/wishlist_screen.dart';
@@ -186,6 +187,16 @@ class AppNavigation {
         path: ViewAllScreen.kRouteName,
         name: "View All",
         builder: (context, state) => ViewAllScreen(
+          key: state.pageKey,
+        ),
+      ),
+
+      /// Product Detail Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: ProductDetail.kRouteName,
+        name: "Product Detail",
+        builder: (context, state) => ProductDetail(
           key: state.pageKey,
         ),
       ),

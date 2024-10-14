@@ -158,7 +158,7 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 2,
-                bottom: 10,
+                // bottom: 10,
                 right: 10,
                 left: 10,
               ),
