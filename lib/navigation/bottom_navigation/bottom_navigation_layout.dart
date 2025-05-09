@@ -136,12 +136,16 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
       child: Scaffold(
         extendBodyBehindAppBar: false,
         resizeToAvoidBottomInset: false,
+        // body: AnnotatedRegion(
+        //   value: getDefaultSystemUiStyle(isDarkTheme),
+        //   // child: TopLevelPageView(
+        //   //   pageController: pageController,
+        //   //   onPageChanged: _handlePageViewChanged,
+        //   // ),
+        //   child: kTopLevelPages[selectedIndex],
+        // ),
         body: AnnotatedRegion(
           value: getDefaultSystemUiStyle(isDarkTheme),
-          // child: TopLevelPageView(
-          //   pageController: pageController,
-          //   onPageChanged: _handlePageViewChanged,
-          // ),
           child: kTopLevelPages[selectedIndex],
         ),
         extendBody: false,
@@ -149,7 +153,7 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
         bottomNavigationBar: Theme(
           data: ThemeData(
             splashColor: Colors.transparent,
-            highlightColor: kPrimaryColor.withOpacity(0.1),
+            highlightColor: kPrimaryColor.withValues(alpha: 0.1),
             primaryColor: kPrimaryColor,
             // fontFamily: GoogleFonts.ubuntu().fontFamily,
           ),

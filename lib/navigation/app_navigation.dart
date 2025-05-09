@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hermes_harbor_flutter_app/screens/product_detail.dart';
+import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
+import 'package:hermes_harbor_flutter_app/screens/product_detail_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/account_screen.dart';
-import 'package:hermes_harbor_flutter_app/screens/tab_screens/favourites_screen.dart';
+import 'package:hermes_harbor_flutter_app/screens/tab_screens/favorites_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/wishlist_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 
+import '../screen_arguments/product_detail_screen_arguments.dart';
 import '../screens/login_screen.dart';
 import '../screens/tab_screens/cart_screen.dart';
 import '../screens/tab_screens/home_screen.dart';
@@ -22,8 +24,8 @@ class AppNavigation {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorHome =
       GlobalKey<NavigatorState>(debugLabel: 'shellHome');
-  static final _shellNavigatorFavourites =
-      GlobalKey<NavigatorState>(debugLabel: 'shellFavourites');
+  static final _shellNavigatorFavorites =
+      GlobalKey<NavigatorState>(debugLabel: 'shellFavorites');
   static final _shellNavigatorWishlist =
       GlobalKey<NavigatorState>(debugLabel: 'shellWishlist');
   static final _shellNavigatorCart =
@@ -124,14 +126,14 @@ class AppNavigation {
           ),
 
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorFavourites,
+            navigatorKey: _shellNavigatorFavorites,
             routes: <RouteBase>[
               GoRoute(
-                path: FavouritesScreen.kRouteName,
-                name: "Favourites",
+                path: FavoritesScreen.kRouteName,
+                name: "Favorites",
                 pageBuilder: (context, state) => reusableTransitionPage(
                   state: state,
-                  child: const FavouritesScreen(),
+                  child: const FavoritesScreen(),
                 ),
               ),
             ],
@@ -186,19 +188,27 @@ class AppNavigation {
         parentNavigatorKey: rootNavigatorKey,
         path: ViewAllScreen.kRouteName,
         name: "View All",
-        builder: (context, state) => ViewAllScreen(
-          key: state.pageKey,
-        ),
+        builder: (context, state) {
+          final viewAllScreenArguments = state.extra as ViewAllScreenArguments?;
+          return ViewAllScreen(
+            key: state.pageKey,
+            viewAllScreenArguments: viewAllScreenArguments,
+          );
+        },
       ),
 
       /// Product Detail Screen
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
-        path: ProductDetail.kRouteName,
+        path: ProductDetailScreen.kRouteName,
         name: "Product Detail",
-        builder: (context, state) => ProductDetail(
-          key: state.pageKey,
-        ),
+        builder: (context, state) {
+          final args = state.extra as ProductDetailScreenArguments;
+          return ProductDetailScreen(
+            key: state.pageKey,
+            product: args.product,
+          );
+        },
       ),
 
       // /// Notice Details

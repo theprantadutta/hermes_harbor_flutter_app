@@ -1,16 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:hermes_harbor_flutter_app/components/shared/categories_view.dart';
 import 'package:hermes_harbor_flutter_app/components/shared/page_title_with_back.dart';
 import 'package:hermes_harbor_flutter_app/components/view_all/products_filter.dart';
+import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
 
 import '../components/layouts/main_layout.dart';
 import '../components/shared/vertical_products_view.dart';
 import '../components/view_all/search_product_field.dart';
 
-class ViewAllScreen extends StatelessWidget {
+class ViewAllScreen extends StatefulWidget {
   static const kRouteName = '/view-all-screen';
 
-  const ViewAllScreen({super.key});
+  final ViewAllScreenArguments? viewAllScreenArguments;
+
+  const ViewAllScreen({
+    super.key,
+    this.viewAllScreenArguments,
+  });
+
+  @override
+  State<ViewAllScreen> createState() => _ViewAllScreenState();
+}
+
+class _ViewAllScreenState extends State<ViewAllScreen> {
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    if (widget.viewAllScreenArguments != null) {
+      if (widget.viewAllScreenArguments!.focusTextField) {
+        _focusNode.requestFocus();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +41,13 @@ class ViewAllScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Column(
                 children: [
                   PageTitleWithBack(title: 'Products'),
-                  SearchProductField(),
+                  SearchProductField(
+                    focusNode: _focusNode,
+                  ),
                 ],
               ),
             ),
@@ -30,12 +55,12 @@ class ViewAllScreen extends StatelessWidget {
               pinned: true,
               delegate: ProductsFilterDelegate(),
             ),
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.0),
-                child: CategoriesView(),
-              ),
-            ),
+            // const SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: EdgeInsets.symmetric(horizontal: 12.0),
+            //     child: CategoriesView(),
+            //   ),
+            // ),
             const VerticalProductsView(),
           ],
         ),

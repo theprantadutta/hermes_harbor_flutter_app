@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void intializeSharedPreferences() async {
+  void initializeSharedPreferences() async {
     _sharedPreferences = await SharedPreferences.getInstance();
     final isDarkMode = _sharedPreferences?.getBool(kIsDarkModeKey);
     if (isDarkMode != null) {
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    intializeSharedPreferences();
+    initializeSharedPreferences();
   }
 
   @override

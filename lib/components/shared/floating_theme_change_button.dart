@@ -16,6 +16,7 @@ class FloatingThemeChangeButton extends StatelessWidget {
     }
 
     return FloatingActionButton(
+      heroTag: UniqueKey(),
       onPressed: handleThemeToggle,
       backgroundColor: kPrimaryColor,
       child: AnimatedSwitcher(

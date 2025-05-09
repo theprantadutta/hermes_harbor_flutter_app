@@ -29,7 +29,7 @@ class _AwesomeBottomBarFancyBorderLayoutState
     return FadeInUp(
       duration: const Duration(milliseconds: 500),
       child: BottomBarInspiredInside(
-        backgroundColor: kPrimaryColor.withOpacity(0.05),
+        backgroundColor: kPrimaryColor.withValues(alpha: 0.05),
         colorSelected: Colors.white,
         // color: isDarkTheme ? Colors.white : Colors.black,
         color: Colors.black,

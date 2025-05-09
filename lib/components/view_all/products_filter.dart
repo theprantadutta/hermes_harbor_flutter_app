@@ -21,7 +21,7 @@ class ProductsFilter extends StatelessWidget {
             margin: EdgeInsets.only(right: index == 10 ? 0 : 5),
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
-              border: Border.all(color: kPrimaryColor.withOpacity(0.2)),
+              border: Border.all(color: kPrimaryColor.withValues(alpha: 0.2)),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Row(

@@ -1,46 +1,68 @@
 import 'package:flutter/material.dart';
 
 class SearchProductField extends StatelessWidget {
+  final bool enabled;
+  final FocusNode? focusNode;
+
   const SearchProductField({
     super.key,
+    this.enabled = true,
+    this.focusNode,
   });
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
     final kPrimaryColor = Theme.of(context).primaryColor;
     return Container(
-      height: height * 0.065,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
+      margin: EdgeInsets.only(
+        left: 10,
+        right: 10,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      height: MediaQuery.sizeOf(context).height * 0.06,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        color: kPrimaryColor.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(25), // More rounded
         border: Border.all(
-          color: kPrimaryColor.withOpacity(0.2),
+          color: kPrimaryColor.withValues(alpha: 0.1),
+          width: 1.5,
         ),
       ),
-      child: Center(
-        child: Row(
-          children: <Widget>[
-            const Icon(
-              Icons.search,
-              color: Colors.grey,
-            ),
-            SizedBox(
-              width: width * 0.04,
-            ),
-            const Expanded(
-              child: TextField(
-                decoration: InputDecoration.collapsed(
-                  hintText: 'Search Products...',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
+      child: TextField(
+        focusNode: focusNode,
+        decoration: InputDecoration(
+          enabled: enabled,
+          // contentPadding: const EdgeInsets.only(top: 12),
+          border: InputBorder.none,
+          hintText: 'Search Hermes Harbor...',
+          hintStyle: TextStyle(
+            color: Colors.black.withValues(alpha: 0.7),
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+          ),
+          prefixIcon: Hero(
+            tag: 'searchIcon',
+            child: Padding(
+              padding: const EdgeInsets.only(left: 12, right: 8),
+              child: Icon(
+                Icons.search,
+                color: kPrimaryColor,
+                size: 24,
               ),
             ),
-          ],
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              Icons.mic,
+              color: kPrimaryColor.withValues(alpha: 0.8),
+            ),
+            onPressed: () {
+              // Voice search functionality
+            },
+          ),
+        ),
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 16,
         ),
       ),
     );
