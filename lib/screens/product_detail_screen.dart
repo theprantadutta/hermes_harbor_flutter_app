@@ -37,7 +37,6 @@ class ProductDetailScreen extends StatelessWidget {
               expandedHeight: height,
               flexibleSpace: ProductHeroSection(
                 images: product.images,
-                productId: product.id,
               ),
               pinned: true,
               collapsedHeight: MediaQuery.sizeOf(context).height * 0.3,
@@ -57,7 +56,6 @@ class ProductDetailScreen extends StatelessWidget {
                     availableColors: product.availableColors,
                   ),
                   const SizedBox(height: 20),
-                  const SizedBox(height: 15),
                   ProductDescription(description: product.description),
                   const SizedBox(height: 15),
                 ],

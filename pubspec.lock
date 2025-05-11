@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.0"
+  animations:
+    dependency: "direct main"
+    description:
+      name: animations
+      sha256: d3d6dcfb218225bbe68e87ccf6378bbb2e32a94900722c5f81611dad089911cb
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.11"
   args:
     dependency: transitive
     description:
@@ -105,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -240,6 +256,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.18"
+  heroine:
+    dependency: "direct main"
+    description:
+      name: heroine
+      sha256: "922caa823a372fc08fabb4483cb0f6c7c6f8abd9aa4fd8e12474086cc40069a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0+1"
   hexcolor:
     dependency: "direct main"
     description:
@@ -549,6 +573,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.1"
+  springster:
+    dependency: transitive
+    description:
+      name: springster
+      sha256: "32b374f6d3c8827e862c0e8622254e7bd2817eefc1b009add98121e6c8f8dad9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0+1"
   sprintf:
     dependency: transitive
     description:

@@ -49,12 +49,11 @@ class _AwesomeBottomBarFancyBorderLayoutState
         items: const [
           TabItem(
             icon: Icons.home_outlined,
-            // title: 'Home',
           ),
-          TabItem(
-            icon: Icons.favorite_outline,
-            // title: 'Favourites',
-          ),
+          // TabItem(
+          //   icon: Icons.favorite_outline,
+          //   // title: 'Favourites',
+          // ),
           TabItem(
             icon: Icons.add_shopping_cart_outlined,
             // title: 'WishList',

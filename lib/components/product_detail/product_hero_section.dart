@@ -4,12 +4,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductHeroSection extends StatefulWidget {
   final List<String> images;
-  final String productId;
 
   const ProductHeroSection({
     super.key,
     required this.images,
-    required this.productId,
   });
 
   @override
@@ -37,18 +35,15 @@ class _ProductHeroSectionState extends State<ProductHeroSection> {
             setState(() => _currentIndex = index);
           },
           itemCount: widget.images.length,
-          itemBuilder: (_, index) => Hero(
-            tag: widget.productId,
-            child: CachedNetworkImage(
-              imageUrl: widget.images[index],
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-              placeholder: (_, __) => Container(
-                color: Colors.grey[200],
-              ),
-              errorWidget: (_, __, ___) => const Icon(Icons.error),
+          itemBuilder: (_, index) => CachedNetworkImage(
+            imageUrl: widget.images[index],
+            fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
+            placeholder: (_, __) => Container(
+              color: Colors.grey[200],
             ),
+            errorWidget: (_, __, ___) => const Icon(Icons.error),
           ),
         ),
 

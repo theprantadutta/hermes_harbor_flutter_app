@@ -27,6 +27,8 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   skeletonizer: ^1.4.3
   gpt_markdown: ^1.0.18
+  heroine: ^0.4.0+1
+  animations: ^2.0.11
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,7 @@ class ProductInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,7 +30,7 @@ class ProductInfoSection extends StatelessWidget {
           flutter_animate.Animate(
             effects: [flutter_animate.FadeEffect(delay: 150.ms)],
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 color: theme.primaryColor.withOpacity(0.08),
                 borderRadius: BorderRadius.circular(4),
@@ -38,8 +38,8 @@ class ProductInfoSection extends StatelessWidget {
               child: Text(
                 brand.toUpperCase(),
                 style: GoogleFonts.raleway(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
                   letterSpacing: 1.8,
                   color: theme.primaryColor,
                 ),
@@ -134,11 +134,13 @@ class ProductInfoSection extends StatelessWidget {
                 const Spacer(),
                 // Action Buttons
                 _buildIconButton(
+                  context: context,
                   icon: Icons.share_outlined,
                   onPressed: () {},
                 ),
                 const SizedBox(width: 8),
                 _buildIconButton(
+                  context: context,
                   icon: Icons.favorite_border,
                   onPressed: () {},
                 ),
@@ -183,18 +185,23 @@ class ProductInfoSection extends StatelessWidget {
   }
 
   Widget _buildIconButton(
-      {required IconData icon, required VoidCallback onPressed}) {
+      {required BuildContext context,
+      required IconData icon,
+      required VoidCallback onPressed}) {
+    final kPrimaryColor = Theme.of(context).primaryColor;
     return Container(
       width: 40,
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.grey[200]!),
+        border: Border.all(color: kPrimaryColor.withValues(alpha: 0.2)),
+        color: kPrimaryColor.withValues(alpha: 0.05),
       ),
       child: IconButton(
         icon: Icon(icon, size: 20),
         onPressed: onPressed,
         splashRadius: 20,
+        color: kPrimaryColor,
       ),
     );
   }

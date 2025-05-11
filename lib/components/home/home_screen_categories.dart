@@ -6,47 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../screens/view_all_screen.dart';
 
-// class HomeScreenCategories extends StatelessWidget {
-//   const HomeScreenCategories({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           // const SectionTitleWithSeeAll(title: 'Shop by Category'),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 'Shop by Category',
-//                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black87,
-//                     ),
-//               ),
-//               TextButton(
-//                 onPressed: () {},
-//                 style: TextButton.styleFrom(
-//                   foregroundColor: Theme.of(context).primaryColor,
-//                 ),
-//                 child: const Text('See All'),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 10),
-//           SizedBox(
-//             height: MediaQuery.sizeOf(context).height * 0.14,
-//             child: const CategoriesView(),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class HomeScreenCategories extends StatelessWidget {
   const HomeScreenCategories({super.key});
 
@@ -135,7 +94,7 @@ class PremiumCategoriesView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       itemCount: categories.length,
-      separatorBuilder: (context, index) => const SizedBox(width: 12),
+      separatorBuilder: (context, index) => const SizedBox(width: 5),
       itemBuilder: (context, index) {
         final category = categories[index];
         return Animate(

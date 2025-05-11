@@ -18,11 +18,18 @@ class TopLevelPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        PageView(
+        // PageView(
+        //   onPageChanged: onPageChanged,
+        //   controller: pageController,
+        //   padEnds: true,
+        //   children: kTopLevelPages,
+        // ),
+        PageView.builder(
           onPageChanged: onPageChanged,
           controller: pageController,
           padEnds: true,
-          children: kTopLevelPages,
+          itemCount: kTopLevelPages.length,
+          itemBuilder: (_, index) => kTopLevelPages[index],
         ),
         // Todo: Undo this if felt necessary
         // const BackgroundDecoration(),

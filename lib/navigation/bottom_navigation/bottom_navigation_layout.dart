@@ -1,18 +1,14 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hermes_harbor_flutter_app/navigation/bottom_navigation/awesome_bottom_bar/awesome_bottom_bar_inspired_fancy.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/selectors.dart';
 import 'top_level_pages.dart';
 
 class BottomNavigationLayout extends StatefulWidget {
-  final StatefulNavigationShell navigationShell;
-
   const BottomNavigationLayout({
     super.key,
-    required this.navigationShell,
   });
 
   @override
@@ -136,39 +132,184 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
       child: Scaffold(
         extendBodyBehindAppBar: false,
         resizeToAvoidBottomInset: false,
-        // body: AnnotatedRegion(
-        //   value: getDefaultSystemUiStyle(isDarkTheme),
-        //   // child: TopLevelPageView(
-        //   //   pageController: pageController,
-        //   //   onPageChanged: _handlePageViewChanged,
-        //   // ),
-        //   child: kTopLevelPages[selectedIndex],
-        // ),
         body: AnnotatedRegion(
           value: getDefaultSystemUiStyle(isDarkTheme),
           child: kTopLevelPages[selectedIndex],
         ),
         extendBody: false,
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        bottomNavigationBar: Theme(
-          data: ThemeData(
-            splashColor: Colors.transparent,
-            highlightColor: kPrimaryColor.withValues(alpha: 0.1),
-            primaryColor: kPrimaryColor,
-            // fontFamily: GoogleFonts.ubuntu().fontFamily,
-          ),
-          child: FadeInUp(
-            duration: const Duration(milliseconds: 500),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 2,
-                // bottom: 10,
-                right: 10,
-                left: 10,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Animate(
+          effects: [
+            SlideEffect(
+              begin: const Offset(0, 1),
+              duration: 800.ms,
+              curve: Curves.fastOutSlowIn,
+            ),
+            FadeEffect(duration: 800.ms),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+            child: PhysicalModel(
+              borderRadius: BorderRadius.circular(24),
+              color: kPrimaryColor.withValues(alpha: 0.5),
+              elevation: 8,
+              shadowColor: kPrimaryColor.withValues(alpha: 0.3),
+              child: Container(
+                height: MediaQuery.sizeOf(context).height * 0.09,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white,
+                      Colors.white.withValues(alpha: 0.96),
+                    ],
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _NavItem(
+                      icon: Icons.home_outlined,
+                      selectedIcon: Icons.home_rounded,
+                      label: "Home",
+                      isActive: selectedIndex == 0,
+                      onTap: () => _updateCurrentPageIndex(0),
+                    ),
+                    _NavItem(
+                      icon: Icons.favorite_outline,
+                      selectedIcon: Icons.favorite_rounded,
+                      label: "Wishlist",
+                      isActive: selectedIndex == 1,
+                      onTap: () => _updateCurrentPageIndex(1),
+                    ),
+                    _FloatingCartButton(
+                      isActive: selectedIndex == 2,
+                      onTap: () => _updateCurrentPageIndex(2),
+                    ),
+                    _NavItem(
+                      icon: Icons.person_2_outlined,
+                      selectedIcon: Icons.person_2_rounded,
+                      label: "Account",
+                      isActive: selectedIndex == 3,
+                      onTap: () => _updateCurrentPageIndex(3),
+                    ),
+                  ],
+                ),
               ),
-              child: AwesomeBottomBarFancyBorderLayout(
-                selectedIndex: selectedIndex,
-                updateCurrentPageIndex: _updateCurrentPageIndex,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Custom Nav Item Widget
+class _NavItem extends StatelessWidget {
+  final IconData icon;
+  final IconData selectedIcon;
+  final String label;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _NavItem({
+    required this.icon,
+    required this.selectedIcon,
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final kPrimaryColor = Theme.of(context).primaryColor;
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: 300.ms,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: isActive
+              ? kPrimaryColor.withValues(alpha: 0.15)
+              : Colors.transparent,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              isActive ? selectedIcon : icon,
+              size: 20,
+              color: isActive ? kPrimaryColor : Colors.grey[600],
+            ),
+            Text(
+              label,
+              style: GoogleFonts.raleway(
+                fontSize: 12,
+                fontWeight: isActive ? FontWeight.w800 : FontWeight.w600,
+                color: isActive ? kPrimaryColor : Colors.grey[600],
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Floating Cart Button Widget
+class _FloatingCartButton extends StatelessWidget {
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _FloatingCartButton({
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final kPrimaryColor = Theme.of(context).primaryColor;
+    return GestureDetector(
+      onTap: onTap,
+      child: Animate(
+        effects: [ScaleEffect(duration: 300.ms)],
+        child: Container(
+          width: 56,
+          height: 56,
+          margin: const EdgeInsets.only(bottom: 24),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isActive
+                  ? [kPrimaryColor, kPrimaryColor.withValues(alpha: 0.8)]
+                  : [Colors.grey[800]!, Colors.grey[600]!],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: kPrimaryColor.withValues(alpha: isActive ? 0.4 : 0.1),
+                blurRadius: 12,
+                spreadRadius: 2,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Badge(
+              // label: Text('3'), // Uncomment for cart count
+              backgroundColor: Colors.white,
+              textColor: kPrimaryColor,
+              child: Icon(
+                isActive
+                    ? Icons.shopping_bag_rounded
+                    : Icons.shopping_bag_outlined,
+                color: Colors.white,
+                size: 26,
               ),
             ),
           ),

@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
 import 'package:hermes_harbor_flutter_app/screens/product_detail_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/account_screen.dart';
-import 'package:hermes_harbor_flutter_app/screens/tab_screens/favorites_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/wishlist_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
+import 'package:heroine/heroine.dart';
 
 import '../screen_arguments/product_detail_screen_arguments.dart';
 import '../screens/login_screen.dart';
@@ -24,8 +24,6 @@ class AppNavigation {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorHome =
       GlobalKey<NavigatorState>(debugLabel: 'shellHome');
-  static final _shellNavigatorFavorites =
-      GlobalKey<NavigatorState>(debugLabel: 'shellFavorites');
   static final _shellNavigatorWishlist =
       GlobalKey<NavigatorState>(debugLabel: 'shellWishlist');
   static final _shellNavigatorCart =
@@ -38,6 +36,7 @@ class AppNavigation {
     initialLocation: initial,
     debugLogDiagnostics: true,
     navigatorKey: rootNavigatorKey,
+    observers: [HeroineController()],
     routes: [
       // /// OnBoardingScreen
       // GoRoute(
@@ -105,9 +104,7 @@ class AppNavigation {
       /// MainWrapper
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
-          return BottomNavigationLayout(
-            navigationShell: navigationShell,
-          );
+          return BottomNavigationLayout();
         },
         branches: <StatefulShellBranch>[
           /// Branch Home
@@ -125,19 +122,19 @@ class AppNavigation {
             ],
           ),
 
-          StatefulShellBranch(
-            navigatorKey: _shellNavigatorFavorites,
-            routes: <RouteBase>[
-              GoRoute(
-                path: FavoritesScreen.kRouteName,
-                name: "Favorites",
-                pageBuilder: (context, state) => reusableTransitionPage(
-                  state: state,
-                  child: const FavoritesScreen(),
-                ),
-              ),
-            ],
-          ),
+          // StatefulShellBranch(
+          //   navigatorKey: _shellNavigatorFavorites,
+          //   routes: <RouteBase>[
+          //     GoRoute(
+          //       path: FavoritesScreen.kRouteName,
+          //       name: "Favorites",
+          //       pageBuilder: (context, state) => reusableTransitionPage(
+          //         state: state,
+          //         child: const FavoritesScreen(),
+          //       ),
+          //     ),
+          //   ],
+          // ),
 
           StatefulShellBranch(
             navigatorKey: _shellNavigatorWishlist,

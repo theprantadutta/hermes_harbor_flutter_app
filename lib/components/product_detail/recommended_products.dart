@@ -18,7 +18,7 @@ class RecommendedProducts extends StatelessWidget {
       children: [
         // --- Section Header ---
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
             'YOU MAY ALSO LIKE',
             style: GoogleFonts.raleway(
@@ -35,10 +35,10 @@ class RecommendedProducts extends StatelessWidget {
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.36,
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             scrollDirection: Axis.horizontal,
             itemCount: similarProducts.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
             itemBuilder: (_, index) {
               final product = similarProducts[index];
               return flutter_animate.Animate(
