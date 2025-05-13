@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+class SettingItem {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+
+  SettingItem({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+  });
+}
+
 class AccountScreen extends StatelessWidget {
   static const kRouteName = '/account';
   const AccountScreen({super.key});
@@ -10,15 +22,35 @@ class AccountScreen extends StatelessWidget {
     final userName = "John Doe";
     final userEmail = "johndoe@example.com";
 
-    final items = [
-      {'icon': Icons.shopping_bag_outlined, 'label': 'My Orders'},
-      {'icon': Icons.favorite_outline, 'label': 'Wishlist'},
-      {'icon': Icons.payment, 'label': 'Payment Methods'},
-      {'icon': Icons.location_on_outlined, 'label': 'Addresses'},
-      {'icon': Icons.settings_outlined, 'label': 'Settings'},
-      {'icon': Icons.help_outline, 'label': 'Help & Support'},
+    final List<SettingItem> items = [
+      SettingItem(
+        title: 'My Orders',
+        subtitle: 'View and manage your orders',
+        icon: Icons.shopping_bag_outlined,
+      ),
+      SettingItem(
+        title: 'Payment Methods',
+        subtitle: 'Manage your payment methods',
+        icon: Icons.payment,
+      ),
+      SettingItem(
+        title: 'Addresses',
+        subtitle: 'Manage your shipping and billing addresses',
+        icon: Icons.location_on_outlined,
+      ),
+      SettingItem(
+        title: 'Settings',
+        subtitle: 'Manage your account settings',
+        icon: Icons.settings_outlined,
+      ),
+      SettingItem(
+        title: 'Help & Support',
+        subtitle: 'Get help and support',
+        icon: Icons.help_outline,
+      ),
     ];
 
+    final kPrimaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Account'),
@@ -32,27 +64,37 @@ class AccountScreen extends StatelessWidget {
           Card(
             elevation: 0,
             color: Colors.grey.shade100,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            margin: const EdgeInsets.symmetric(horizontal: 12),
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(15),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 32,
-                    backgroundColor: Colors.black,
+                    backgroundColor: kPrimaryColor.withValues(alpha: 0.2),
                     child: Icon(Icons.person, color: Colors.white, size: 32),
                   ),
                   const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(userName,
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600)),
+                      Text(
+                        userName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text(userEmail,
-                          style: const TextStyle(color: Colors.black54)),
+                      Text(
+                        userEmail,
+                        style: const TextStyle(
+                          color: Colors.black54,
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -63,35 +105,44 @@ class AccountScreen extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Action items
-          ...items.map(
-            (item) => ListTile(
-              leading: Icon(item['icon'] as IconData),
-              title: Text(item['label'] as String),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                // You can handle navigation here
-              },
-            ).animate().fadeIn(duration: 200.ms).slideX(begin: -0.1),
+          Expanded(
+            child: Column(
+              children: items
+                  .map(
+                    (item) => Expanded(
+                      child: Center(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 20,
+                            backgroundColor:
+                                kPrimaryColor.withValues(alpha: 0.2),
+                            child: Icon(
+                              item.icon,
+                              color: Colors.white,
+                            ),
+                          ),
+                          title: Text(item.title),
+                          subtitle: Text(item.title),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () {
+                            // You can handle navigation here
+                          },
+                        )
+                            .animate()
+                            .fadeIn(duration: 200.ms)
+                            .slideY(begin: -0.1),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
 
-          const Spacer(),
+          const SizedBox(
+            height: 10,
+          ),
 
           // Logout button
-          // ElevatedButton.icon(
-          //   style: ElevatedButton.styleFrom(
-          //     backgroundColor: Colors.black,
-          //     foregroundColor: Colors.white,
-          //     shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.circular(10)),
-          //     padding: const EdgeInsets.symmetric(vertical: 14),
-          //   ),
-          //   onPressed: () {
-          //     // Handle logout
-          //   },
-          //   icon: const Icon(Icons.logout),
-          //   label: const Text("Logout", style: TextStyle(fontSize: 16)),
-          // ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.2),
-
           GestureDetector(
             onTap: () {
               // Handle logout
@@ -101,7 +152,7 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
               margin: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: kPrimaryColor.withValues(alpha: 0.8),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -109,8 +160,13 @@ class AccountScreen extends StatelessWidget {
                 children: const [
                   Icon(Icons.logout, color: Colors.white),
                   SizedBox(width: 12),
-                  Text("Logout",
-                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                  Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
             ),

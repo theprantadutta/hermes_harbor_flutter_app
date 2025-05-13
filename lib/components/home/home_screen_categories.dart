@@ -6,6 +6,40 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../screens/view_all_screen.dart';
 
+const List<CategoryModel> categories = [
+  CategoryModel(
+    name: 'Men',
+    image: 'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg',
+    color: Color(0xFF3A7BD5), // Gradient blue
+    icon: Icons.style,
+  ),
+  CategoryModel(
+    name: 'Women',
+    image: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg',
+    color: Color(0xFFC6426E), // Gradient pink
+    icon: Icons.diamond,
+  ),
+  CategoryModel(
+    name: 'Luxury',
+    image: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg',
+    color: Color(0xFFf7971e), // Gradient gold
+    icon: Icons.workspace_premium,
+  ),
+  CategoryModel(
+    name: 'Electronics',
+    image: 'https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg',
+    color: Color(0xFF4776E6), // Gradient purple
+    icon: Icons.bolt,
+  ),
+  CategoryModel(
+    name: 'Home',
+    image:
+        'https://images.pexels.com/photos/584399/living-room-couch-interior-room-584399.jpeg',
+    color: Color(0xFF00b09b), // Gradient teal
+    icon: Icons.king_bed,
+  ),
+];
+
 class HomeScreenCategories extends StatelessWidget {
   const HomeScreenCategories({super.key});
 
@@ -51,42 +85,6 @@ class HomeScreenCategories extends StatelessWidget {
 
 class PremiumCategoriesView extends StatelessWidget {
   const PremiumCategoriesView({super.key});
-
-  final List<CategoryModel> categories = const [
-    CategoryModel(
-      name: 'Men',
-      image:
-          'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg',
-      color: Color(0xFF3A7BD5), // Gradient blue
-      icon: Icons.style,
-    ),
-    CategoryModel(
-      name: 'Women',
-      image:
-          'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg',
-      color: Color(0xFFC6426E), // Gradient pink
-      icon: Icons.diamond,
-    ),
-    CategoryModel(
-      name: 'Luxury',
-      image: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg',
-      color: Color(0xFFf7971e), // Gradient gold
-      icon: Icons.workspace_premium,
-    ),
-    CategoryModel(
-      name: 'Electronics',
-      image: 'https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg',
-      color: Color(0xFF4776E6), // Gradient purple
-      icon: Icons.bolt,
-    ),
-    CategoryModel(
-      name: 'Home',
-      image:
-          'https://images.pexels.com/photos/584399/living-room-couch-interior-room-584399.jpeg',
-      color: Color(0xFF00b09b), // Gradient teal
-      icon: Icons.king_bed,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {

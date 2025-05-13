@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:hermes_harbor_flutter_app/components/shared/single_product_view.dart';
 
 import '../../dummy/dummy_products.dart';
+import 'two_product_view.dart';
 
 class VerticalProductsView extends StatelessWidget {
   const VerticalProductsView({super.key});
@@ -10,10 +10,22 @@ class VerticalProductsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.all(12),
-      sliver: SliverGrid(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
+            final firstIndex = index * 2;
+            final secondIndex = firstIndex + 1;
+
+            // Don't build if we've reached the end
+            if (firstIndex >= demoProducts.length) return null;
+
+            // Check if we have a second product for this row
+            final hasSecondProduct = secondIndex < demoProducts.length;
+
             return Animate(
               effects: [
                 FadeEffect(duration: 300.ms),
@@ -24,18 +36,18 @@ class VerticalProductsView extends StatelessWidget {
                   delay: (100 * index).ms,
                 ),
               ],
-              child: SingleProductView(
-                product: demoProducts[index % demoProducts.length],
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: TwoProductRow(
+                  leftProduct: demoProducts[firstIndex],
+                  rightProduct:
+                      hasSecondProduct ? demoProducts[secondIndex] : null,
+                ),
               ),
             );
           },
-          childCount: demoProducts.length,
-        ),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.5,
-          mainAxisSpacing: 0,
-          crossAxisSpacing: 0,
+          // Calculate item count for pairs (round up)
+          childCount: (demoProducts.length / 2).ceil(),
         ),
       ),
     );

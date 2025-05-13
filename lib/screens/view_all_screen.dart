@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hermes_harbor_flutter_app/components/shared/page_title_with_back.dart';
-import 'package:hermes_harbor_flutter_app/components/view_all/products_filter.dart';
+import 'package:hermes_harbor_flutter_app/components/view_all/products_categories.dart';
 import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
 
+import '../components/home/home_screen_categories.dart';
 import '../components/layouts/main_layout.dart';
 import '../components/shared/vertical_products_view.dart';
 import '../components/view_all/search_product_field.dart';
@@ -51,6 +52,9 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                 ],
               ),
             ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 5),
+            ),
             SliverPersistentHeader(
               pinned: true,
               delegate: ProductsFilterDelegate(),
@@ -72,10 +76,15 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
 class ProductsFilterDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(
       color: Colors.white,
-      child: const ProductsFilter(),
+      child: const ProductsCategories(
+        categories: categories,
+      ),
     );
   }
 
