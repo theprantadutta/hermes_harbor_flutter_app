@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/accounts/account_screens_app_bar.dart';
 import '../../components/layouts/main_layout.dart';
@@ -209,7 +208,7 @@ class HelpAndSupportScreen extends StatelessWidget {
               icon: Icons.email_rounded,
               title: 'Email',
               value: 'support@hermesharbor.com',
-              onTap: () => _launchEmail(context, 'support@hermesharbor.com'),
+              onTap: () => _showComingSoon(context, 'Email Support'),
             ),
             const Divider(height: 24),
             _buildContactRow(
@@ -217,7 +216,7 @@ class HelpAndSupportScreen extends StatelessWidget {
               icon: Icons.phone_rounded,
               title: 'Phone',
               value: '+1 (555) 123-4567',
-              onTap: () => _callNumber(context, '+15551234567'),
+              onTap: () => _showComingSoon(context, 'Call Support'),
             ),
             const Divider(height: 24),
             _buildContactRow(
@@ -225,7 +224,7 @@ class HelpAndSupportScreen extends StatelessWidget {
               icon: Icons.location_on_rounded,
               title: 'Address',
               value: '123 Fashion Ave, New York, NY 10001',
-              onTap: () => _openMaps(context, '123 Fashion Ave, New York'),
+              onTap: () => _showComingSoon(context, 'Location Support'),
             ),
           ],
         ),
@@ -290,31 +289,5 @@ class HelpAndSupportScreen extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('$feature coming soon!')),
     );
-  }
-
-  void _launchEmailSupport(BuildContext context) {
-    // final Uri emailLaunchUri = Uri(
-    //   scheme: 'mailto',
-    //   path: 'support@hermesharbor.com',
-    //   queryParameters: {'subject': 'Support Request'},
-    // );
-    // launchUrl(emailLaunchUri);
-  }
-
-  void _callSupport(BuildContext context) {
-    // launchUrl(Uri.parse('tel:+15551234567'));
-  }
-
-  void _launchEmail(BuildContext context, String email) {
-    // launchUrl(Uri.parse('mailto:$email'));
-  }
-
-  void _callNumber(BuildContext context, String phoneNumber) {
-    // launchUrl(Uri.parse('tel:$phoneNumber'));
-  }
-
-  void _openMaps(BuildContext context, String address) {
-    // final query = Uri.encodeComponent(address);
-    // launchUrl(Uri.parse('https://www.google.com/maps/search/?api=1&query=$query'));
   }
 }
