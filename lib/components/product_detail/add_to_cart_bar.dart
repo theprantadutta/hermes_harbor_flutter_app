@@ -18,7 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 //           color: Colors.white,
 //           boxShadow: [
 //             BoxShadow(
-//               color: Colors.black.withOpacity(0.1),
+//               color: Colors.black.withValues(alpha:0.1),
 //               blurRadius: 16,
 //               offset: const Offset(0, -4),
 //             ),
@@ -102,7 +102,7 @@ class AddToCartBar extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 16,
               offset: const Offset(0, -4),
             ),

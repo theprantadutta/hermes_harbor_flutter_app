@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/home/home_screen_categories.dart';
 import '../models/product.dart';
 
 final popularProducts = [
@@ -28,7 +29,7 @@ final popularProducts = [
       'Mac & Windows Compatible',
       'Silent Typing',
     ],
-    category: 'Keyboards',
+    category: categories[3].name,
     reviewCount: 310,
     isFavorite: true,
     createdAt: DateTime(2025, 2, 22),
@@ -64,7 +65,7 @@ final popularProducts = [
       'Height Adjustment',
       'Wheels for Carpet & Hard Floor',
     ],
-    category: 'Furniture',
+    category: categories[2].name,
     reviewCount: 214,
     isFavorite: false,
     createdAt: DateTime(2025, 1, 14),
@@ -100,7 +101,7 @@ final popularProducts = [
       'Memory Function',
       'Energy Efficient LED',
     ],
-    category: 'Lighting',
+    category: categories[4].name,
     reviewCount: 180,
     isFavorite: true,
     createdAt: DateTime(2025, 3, 6),

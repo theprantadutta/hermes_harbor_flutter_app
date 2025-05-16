@@ -29,6 +29,7 @@ dependencies:
   gpt_markdown: ^1.0.18
   heroine: ^0.4.0+1
   animations: ^2.0.11
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -39,3 +40,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/carousels/

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
+import 'package:hermes_harbor_flutter_app/screens/account_screens/address_screen.dart';
+import 'package:hermes_harbor_flutter_app/screens/account_screens/my_orders_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/product_detail_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/account_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/wishlist_screen.dart';
@@ -8,6 +10,9 @@ import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 import 'package:heroine/heroine.dart';
 
 import '../screen_arguments/product_detail_screen_arguments.dart';
+import '../screens/account_screens/help_and_support_screen.dart';
+import '../screens/account_screens/payment_methods_screen.dart';
+import '../screens/account_screens/setting_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/tab_screens/cart_screen.dart';
 import '../screens/tab_screens/home_screen.dart';
@@ -204,6 +209,66 @@ class AppNavigation {
           return ProductDetailScreen(
             key: state.pageKey,
             product: args.product,
+          );
+        },
+      ),
+
+      /// My Orders Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: MyOrdersScreen.kRouteName,
+        name: "My Orders",
+        builder: (context, state) {
+          return MyOrdersScreen(
+            key: state.pageKey,
+          );
+        },
+      ),
+
+      /// Payment Methods Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: PaymentMethodsScreen.kRouteName,
+        name: "Payment Methods",
+        builder: (context, state) {
+          return PaymentMethodsScreen(
+            key: state.pageKey,
+          );
+        },
+      ),
+
+      /// Addresses Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: AddressScreen.kRouteName,
+        name: "Addresses",
+        builder: (context, state) {
+          return AddressScreen(
+            key: state.pageKey,
+          );
+        },
+      ),
+
+      /// Setting Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: SettingScreen.kRouteName,
+        name: "Setting",
+        builder: (context, state) {
+          return SettingScreen(
+            key: state.pageKey,
+          );
+        },
+      ),
+
+      /// Help & Support Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: HelpAndSupportScreen.kRouteName,
+        name: "Help & Support",
+        builder: (context, state) {
+          return HelpAndSupportScreen(
+            key: state.pageKey,
           );
         },
       ),

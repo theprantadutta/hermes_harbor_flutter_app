@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hermes_harbor_flutter_app/components/home/home_screen_categories.dart';
-import 'package:hermes_harbor_flutter_app/components/home/home_screen_hero_section.dart';
-import 'package:hermes_harbor_flutter_app/components/view_all/search_product_field.dart';
-import 'package:hermes_harbor_flutter_app/dummy/curated_for_you_items.dart';
-import 'package:hermes_harbor_flutter_app/dummy/popular_product_lilst.dart';
-import 'package:hermes_harbor_flutter_app/dummy/trending_now_list.dart';
-import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 
+import '../../components/home/home_screen_categories.dart';
+import '../../components/home/home_screen_hero_section.dart';
+import '../../components/view_all/search_product_field.dart';
+import '../../dummy/curated_for_you_items.dart';
+import '../../dummy/popular_product_list.dart';
+import '../../dummy/trending_now_list.dart';
+import '../../screens/view_all_screen.dart';
 import '../../components/shared/horizontal_product_view.dart';
 
 class HomeScreen extends StatefulWidget {

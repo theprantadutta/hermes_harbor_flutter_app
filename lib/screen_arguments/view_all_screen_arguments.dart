@@ -1,5 +1,6 @@
 class ViewAllScreenArguments {
   final bool focusTextField;
+  final String category;
 
-  ViewAllScreenArguments({this.focusTextField = false});
+  ViewAllScreenArguments({this.focusTextField = false, this.category = 'All'});
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 final dummyCarouselItems = [
   {
     'id': 1,
-    'image': 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg',
     'tag': 'LUXURY EDITION',
     'title': 'Crafted Elegance\nFor The Discerning',
     'cta': 'DISCOVER',
@@ -11,7 +10,6 @@ final dummyCarouselItems = [
   },
   {
     'id': 2,
-    'image': 'https://images.pexels.com/photos/845434/pexels-photo-845434.jpeg',
     'tag': 'SUMMER COLLECTION',
     'title': 'Timeless Pieces\nFor Modern Living',
     'cta': 'EXPLORE',
@@ -19,8 +17,6 @@ final dummyCarouselItems = [
   },
   {
     'id': 3,
-    'image':
-        'https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg',
     'tag': 'PRIVATE CLIENT',
     'title': 'Exclusive Access\nTo Rare Finds',
     'cta': 'APPLY',
@@ -28,8 +24,6 @@ final dummyCarouselItems = [
   },
   {
     'id': 4,
-    'image':
-        'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg',
     'tag': 'URBAN VIBES',
     'title': 'Minimal Designs\nWith Maximum Impact',
     'cta': 'SHOP NOW',
@@ -37,8 +31,6 @@ final dummyCarouselItems = [
   },
   {
     'id': 5,
-    'image':
-        'https://images.pexels.com/photos/2792158/pexels-photo-2792158.jpeg',
     'tag': 'ARTISAN SERIES',
     'title': 'Handcrafted Styles\nRooted in Tradition',
     'cta': 'LEARN MORE',

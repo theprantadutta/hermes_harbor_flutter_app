@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 
-class SettingItem {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-
-  SettingItem({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-  });
-}
+import '../../constants/setting_items.dart';
 
 class AccountScreen extends StatelessWidget {
   static const kRouteName = '/account';
@@ -21,34 +12,6 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final userName = "John Doe";
     final userEmail = "johndoe@example.com";
-
-    final List<SettingItem> items = [
-      SettingItem(
-        title: 'My Orders',
-        subtitle: 'View and manage your orders',
-        icon: Icons.shopping_bag_outlined,
-      ),
-      SettingItem(
-        title: 'Payment Methods',
-        subtitle: 'Manage your payment methods',
-        icon: Icons.payment,
-      ),
-      SettingItem(
-        title: 'Addresses',
-        subtitle: 'Manage your shipping and billing addresses',
-        icon: Icons.location_on_outlined,
-      ),
-      SettingItem(
-        title: 'Settings',
-        subtitle: 'Manage your account settings',
-        icon: Icons.settings_outlined,
-      ),
-      SettingItem(
-        title: 'Help & Support',
-        subtitle: 'Get help and support',
-        icon: Icons.help_outline,
-      ),
-    ];
 
     final kPrimaryColor = Theme.of(context).primaryColor;
     return Scaffold(
@@ -75,7 +38,10 @@ class AccountScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 32,
                     backgroundColor: kPrimaryColor.withValues(alpha: 0.2),
-                    child: Icon(Icons.person, color: Colors.white, size: 32),
+                    // child: Icon(Icons.person, color: Colors.white, size: 32),
+                    backgroundImage: const NetworkImage(
+                      'https://i.pravatar.cc/150?img=2',
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Column(
@@ -107,30 +73,46 @@ class AccountScreen extends StatelessWidget {
           // Action items
           Expanded(
             child: Column(
-              children: items
+              children: settingItems
                   .map(
                     (item) => Expanded(
                       child: Center(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            radius: 20,
-                            backgroundColor:
-                                kPrimaryColor.withValues(alpha: 0.2),
-                            child: Icon(
-                              item.icon,
-                              color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 22,
+                              backgroundColor:
+                                  kPrimaryColor.withValues(alpha: 0.1),
+                              child: Icon(
+                                item.icon,
+                                color: kPrimaryColor,
+                              ),
                             ),
-                          ),
-                          title: Text(item.title),
-                          subtitle: Text(item.title),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: () {
-                            // You can handle navigation here
-                          },
-                        )
-                            .animate()
-                            .fadeIn(duration: 200.ms)
-                            .slideY(begin: -0.1),
+                            title: Text(
+                              item.title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(item.subtitle),
+                            trailing: const Icon(Icons.chevron_right),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: kPrimaryColor.withValues(alpha: 0.1),
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            onTap: () {
+                              context.push(item.route);
+                            },
+                          )
+                              .animate()
+                              .fadeIn(duration: 200.ms)
+                              .slideY(begin: -0.1),
+                        ),
                       ),
                     ),
                   )

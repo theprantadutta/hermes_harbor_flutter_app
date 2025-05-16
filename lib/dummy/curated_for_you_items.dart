@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/home/home_screen_categories.dart';
 import '../models/product.dart';
 
 final curatedForYouProducts = [
@@ -28,7 +29,7 @@ final curatedForYouProducts = [
       'USB-C Fast Charging',
       'Auto Pairing',
     ],
-    category: 'Audio',
+    category: categories[4].name,
     reviewCount: 120,
     isFavorite: false,
     createdAt: DateTime(2025, 3, 28),
@@ -64,7 +65,7 @@ final curatedForYouProducts = [
       'Wide Format',
       'Magnetic Cable Holder',
     ],
-    category: 'Accessories',
+    category: categories[3].name,
     reviewCount: 78,
     isFavorite: true,
     createdAt: DateTime(2025, 3, 18),
@@ -100,7 +101,7 @@ final curatedForYouProducts = [
       'Zipper Mesh Pocket',
       'Slim Profile',
     ],
-    category: 'Organizers',
+    category: categories[4].name,
     reviewCount: 45,
     isFavorite: false,
     createdAt: DateTime(2025, 4, 3),

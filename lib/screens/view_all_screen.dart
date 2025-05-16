@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hermes_harbor_flutter_app/components/shared/page_title_with_back.dart';
-import 'package:hermes_harbor_flutter_app/components/view_all/products_categories.dart';
-import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
-
+import 'package:hermes_harbor_flutter_app/dummy/popular_product_list.dart';
+import 'package:hermes_harbor_flutter_app/dummy/trending_now_list.dart';
+import 'package:hermes_harbor_flutter_app/models/product.dart';
 import '../components/home/home_screen_categories.dart';
+import '../components/shared/page_title_with_back.dart';
+import '../components/view_all/products_categories.dart';
+import '../dummy/electronics_category_products.dart';
+import '../dummy/home_category_products.dart';
+import '../dummy/luxury_category_products.dart';
+import '../dummy/men_category_products.dart';
+import '../dummy/product_list.dart';
+import '../dummy/women_category_products.dart';
+import '../screen_arguments/view_all_screen_arguments.dart';
+
 import '../components/layouts/main_layout.dart';
 import '../components/shared/vertical_products_view.dart';
 import '../components/view_all/search_product_field.dart';
+import '../dummy/dummy_products.dart';
 
 class ViewAllScreen extends StatefulWidget {
   static const kRouteName = '/view-all-screen';
@@ -24,6 +34,18 @@ class ViewAllScreen extends StatefulWidget {
 
 class _ViewAllScreenState extends State<ViewAllScreen> {
   late final FocusNode _focusNode;
+  String selectedCategory = 'All';
+  final allProducts = [
+    ...demoProducts,
+    ...popularProducts,
+    ...trendingNowProducts,
+    ...relatedProducts,
+    ...menCategoryProducts,
+    ...womenCategoryProducts,
+    ...luxuryCategoryProducts,
+    ...electronicsCategoryProducts,
+    ...homeCategoryProducts,
+  ];
 
   @override
   void initState() {
@@ -33,11 +55,19 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
       if (widget.viewAllScreenArguments!.focusTextField) {
         _focusNode.requestFocus();
       }
+      selectedCategory = widget.viewAllScreenArguments!.category;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Product> filteredProducts = [];
+    if (selectedCategory == 'All') {
+      filteredProducts = allProducts;
+    } else {
+      filteredProducts =
+          allProducts.where((x) => x.category == selectedCategory).toList();
+    }
     return MainLayout(
       body: SafeArea(
         child: CustomScrollView(
@@ -57,15 +87,15 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
             ),
             SliverPersistentHeader(
               pinned: true,
-              delegate: ProductsFilterDelegate(),
+              delegate: ProductsFilterDelegate(
+                  selectedCategory: selectedCategory,
+                  onCategorySelected: (category) {
+                    setState(() {
+                      selectedCategory = category;
+                    });
+                  }),
             ),
-            // const SliverToBoxAdapter(
-            //   child: Padding(
-            //     padding: EdgeInsets.symmetric(horizontal: 12.0),
-            //     child: CategoriesView(),
-            //   ),
-            // ),
-            const VerticalProductsView(),
+            VerticalProductsView(demoProducts: filteredProducts),
           ],
         ),
       ),
@@ -74,6 +104,14 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
 }
 
 class ProductsFilterDelegate extends SliverPersistentHeaderDelegate {
+  final String selectedCategory;
+  final ValueChanged<String> onCategorySelected;
+
+  ProductsFilterDelegate({
+    required this.selectedCategory,
+    required this.onCategorySelected,
+  });
+
   @override
   Widget build(
     BuildContext context,
@@ -82,8 +120,10 @@ class ProductsFilterDelegate extends SliverPersistentHeaderDelegate {
   ) {
     return Container(
       color: Colors.white,
-      child: const ProductsCategories(
+      child: ProductsCategories(
         categories: categories,
+        selectedCategory: selectedCategory,
+        onCategorySelected: onCategorySelected,
       ),
     );
   }
@@ -95,5 +135,7 @@ class ProductsFilterDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => 60.0; // Minimum height
 
   @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant ProductsFilterDelegate oldDelegate) {
+    return oldDelegate.selectedCategory != selectedCategory;
+  }
 }

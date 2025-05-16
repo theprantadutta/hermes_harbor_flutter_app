@@ -39,8 +39,8 @@ class FullWidthProductCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: getDefaultGradient(
-            kPrimaryColor.withOpacity(0.05),
-            kHelperColorThree.withOpacity(0.05),
+            kPrimaryColor.withValues(alpha: 0.05),
+            kHelperColorThree.withValues(alpha: 0.05),
           ),
           border: Border.all(
             color: Colors.white,
@@ -59,7 +59,7 @@ class FullWidthProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -85,7 +85,7 @@ class FullWidthProductCard extends StatelessWidget {
                       right: 4, // Adjusted position
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7),
+                          color: Colors.black.withValues(alpha: 0.7),
                           shape: BoxShape.circle,
                         ),
                         padding: const EdgeInsets.all(4), // Reduced padding
@@ -119,7 +119,7 @@ class FullWidthProductCard extends StatelessWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: kPrimaryColor.withOpacity(0.1),
+                        color: kPrimaryColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(

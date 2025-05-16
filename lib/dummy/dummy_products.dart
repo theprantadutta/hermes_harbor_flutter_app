@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:hermes_harbor_flutter_app/models/product.dart';
 
+import '../components/home/home_screen_categories.dart';
+
 final List<Product> demoProducts = [
   Product(
     id: 'p1',
@@ -16,7 +18,7 @@ final List<Product> demoProducts = [
     tags: ['chair', 'minimalist', 'furniture'],
     availableColors: [Colors.white, Colors.black],
     brand: 'Eames',
-    category: 'Chairs',
+    category: categories[2].name,
     features: ['Leatherette Upholstery', 'Metal Frame', 'Adjustable Height'],
     reviewCount: 42,
     createdAt: DateTime(2025, 1, 15),
@@ -34,7 +36,7 @@ final List<Product> demoProducts = [
     tags: ['table', 'nordic', 'wood'],
     availableColors: [Colors.brown, Colors.black],
     brand: 'IKEA',
-    category: 'Tables',
+    category: categories[2].name,
     features: ['Solid Wood', 'Metal Legs', 'Adjustable Height'],
     reviewCount: 32,
     createdAt: DateTime(2025, 2, 10),
@@ -52,7 +54,7 @@ final List<Product> demoProducts = [
     tags: ['sofa', 'modern', 'living room'],
     availableColors: [Colors.white, Colors.black],
     brand: 'IKEA',
-    category: 'Sofas',
+    category: categories[2].name,
     features: ['Leatherette Upholstery', 'Metal Frame', 'Adjustable Height'],
     reviewCount: 52,
     createdAt: DateTime(2025, 3, 5),
@@ -70,7 +72,7 @@ final List<Product> demoProducts = [
     tags: ['lamp', 'industrial', 'lighting'],
     availableColors: [Colors.white, Colors.black],
     brand: 'IKEA',
-    category: 'Lamps',
+    category: categories[3].name,
     features: ['Metal Frame', 'Adjustable Height', 'LED Light'],
     reviewCount: 22,
     createdAt: DateTime(2025, 4, 20),
@@ -88,7 +90,7 @@ final List<Product> demoProducts = [
     tags: ['shelf', 'scandinavian', 'decor'],
     availableColors: [Colors.white, Colors.black],
     brand: 'IKEA',
-    category: 'Shelves',
+    category: categories[4].name,
     features: ['Solid Wood', 'Metal Legs', 'Adjustable Height'],
     reviewCount: 12,
     createdAt: DateTime(2025, 5, 15),

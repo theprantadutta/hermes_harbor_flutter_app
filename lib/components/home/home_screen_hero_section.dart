@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,8 +35,8 @@ class HomeScreenHeroSection extends StatelessWidget {
                   Positioned.fill(
                     child: Hero(
                       tag: 'carousel_${item['id']}',
-                      child: CachedNetworkImage(
-                        imageUrl: item['image'] as String,
+                      child: Image.asset(
+                        'assets/carousels/carousel_${item['id']}.jpeg',
                         fit: BoxFit.cover,
                         alignment: Alignment.center,
                       ),
@@ -51,9 +50,9 @@ class HomeScreenHeroSection extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withOpacity(0.6),
+                          Colors.black.withValues(alpha: 0.6),
                           Colors.transparent,
-                          Colors.black.withOpacity(0.4),
+                          Colors.black.withValues(alpha: 0.4),
                         ],
                         stops: const [0.0, 0.3, 1.0],
                       ),
@@ -142,7 +141,8 @@ class HomeScreenHeroSection extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 elevation: 8,
-                                shadowColor: Colors.black.withOpacity(0.3),
+                                shadowColor:
+                                    Colors.black.withValues(alpha: 0.3),
                               ),
                               icon: const Icon(Icons.arrow_forward, size: 20),
                               label: Text(

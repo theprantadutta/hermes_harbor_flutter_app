@@ -80,8 +80,8 @@ class TwoProductRow extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: getDefaultGradient(
-              kPrimaryColor.withOpacity(0.05),
-              kHelperColorThree.withOpacity(0.05),
+              kPrimaryColor.withValues(alpha: 0.05),
+              kHelperColorThree.withValues(alpha: 0.05),
             ),
             border: Border.all(
               color: Colors.white,
@@ -101,7 +101,7 @@ class TwoProductRow extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -141,7 +141,7 @@ class TwoProductRow extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: kPrimaryColor.withOpacity(0.1),
+                  color: kPrimaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -158,14 +158,17 @@ class TwoProductRow extends StatelessWidget {
               const SizedBox(height: 6),
 
               // Product name
-              Text(
-                product.name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13, // Slightly smaller
+              SizedBox(
+                height: 20,
+                child: Text(
+                  product.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13, // Slightly smaller
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
 
               const SizedBox(height: 8),

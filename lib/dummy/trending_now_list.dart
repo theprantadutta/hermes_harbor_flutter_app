@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/home/home_screen_categories.dart';
 import '../models/product.dart';
 
 final trendingNowProducts = [
@@ -28,7 +29,7 @@ final trendingNowProducts = [
       'Wired/Wireless Dual Mode',
       'RGB Sync with Software',
     ],
-    category: 'Mouse',
+    category: categories[3].name,
     reviewCount: 127,
     isFavorite: false,
     createdAt: DateTime(2025, 3, 18),
@@ -64,7 +65,7 @@ final trendingNowProducts = [
       'Built-in Microphone',
       'TWS Pairing',
     ],
-    category: 'Audio',
+    category: categories[3].name,
     reviewCount: 203,
     isFavorite: true,
     createdAt: DateTime(2025, 2, 12),
@@ -100,7 +101,7 @@ final trendingNowProducts = [
       'Anti-Slip Silicone Pads',
       'Improves Posture',
     ],
-    category: 'Accessories',
+    category: categories[4].name,
     reviewCount: 142,
     isFavorite: true,
     createdAt: DateTime(2025, 3, 1),

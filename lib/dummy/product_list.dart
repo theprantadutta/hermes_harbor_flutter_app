@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/home/home_screen_categories.dart';
 import '../models/product.dart';
 
 final relatedProducts = [
@@ -24,7 +25,7 @@ final relatedProducts = [
     availableColors: [Colors.blueGrey, Colors.deepPurple],
     brand: 'FitPulse',
     features: ['Step Tracking', 'Sleep Monitor', 'Notification Alerts'],
-    category: 'Wearables',
+    category: categories[3].name,
     reviewCount: 89,
     isFavorite: false,
     createdAt: DateTime(2025, 3, 12),
@@ -60,7 +61,7 @@ final relatedProducts = [
       'Wireless Charging Case',
       'Bluetooth 5.3'
     ],
-    category: 'Audio',
+    category: categories[3].name,
     reviewCount: 144,
     isFavorite: false,
     createdAt: DateTime(2025, 2, 28),
@@ -92,7 +93,7 @@ final relatedProducts = [
     availableColors: [Colors.brown, Colors.black],
     brand: 'HERMES HARBOR',
     features: ['Quick Release Design', 'Stitched Finish', 'Genuine Leather'],
-    category: 'Accessories',
+    category: categories[3].name,
     reviewCount: 52,
     isFavorite: false,
     createdAt: DateTime(2025, 4, 5),
@@ -124,7 +125,7 @@ final relatedProducts = [
     availableColors: [Colors.white, Colors.black],
     brand: 'PowerGrid',
     features: ['15W Fast Charge', 'Dual Coil Technology', 'USB-C Input'],
-    category: 'Chargers',
+    category: categories[3].name,
     reviewCount: 76,
     isFavorite: true,
     createdAt: DateTime(2025, 1, 22),
@@ -156,7 +157,7 @@ final relatedProducts = [
     availableColors: [Colors.transparent, Colors.black12],
     brand: 'HERMES HARBOR',
     features: ['Shock Absorbing Corners', 'Snug Fit', 'Lightweight'],
-    category: 'Accessories',
+    category: categories[4].name,
     reviewCount: 33,
     isFavorite: false,
     createdAt: DateTime(2025, 3, 2),
@@ -188,7 +189,7 @@ final relatedProducts = [
     availableColors: [Colors.black, Colors.cyan],
     brand: 'HERMES HARBOR',
     features: ['4-in-1 Bundle', 'Gift-Ready Packaging', '1-Year Warranty'],
-    category: 'Bundles',
+    category: categories[1].name,
     reviewCount: 67,
     isFavorite: true,
     createdAt: DateTime(2025, 3, 25),

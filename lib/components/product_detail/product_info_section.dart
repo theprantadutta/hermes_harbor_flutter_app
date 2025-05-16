@@ -32,7 +32,7 @@ class ProductInfoSection extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.08),
+                color: theme.primaryColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -109,10 +109,10 @@ class ProductInfoSection extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.08),
+                    color: Colors.amber.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Colors.amber.withOpacity(0.3),
+                      color: Colors.amber.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),

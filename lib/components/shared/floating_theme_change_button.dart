@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 class FloatingThemeChangeButton extends StatelessWidget {
   const FloatingThemeChangeButton({super.key});
 
@@ -8,11 +10,11 @@ class FloatingThemeChangeButton extends StatelessWidget {
     var isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     final kPrimaryColor = Theme.of(context).primaryColor;
     void handleThemeToggle() {
-      // if (isDarkTheme) {
-      //   MyApp.of(context).changeTheme(ThemeMode.light);
-      // } else {
-      //   MyApp.of(context).changeTheme(ThemeMode.dark);
-      // }
+      if (isDarkTheme) {
+        MyApp.of(context).changeTheme(ThemeMode.light);
+      } else {
+        MyApp.of(context).changeTheme(ThemeMode.dark);
+      }
     }
 
     return FloatingActionButton(

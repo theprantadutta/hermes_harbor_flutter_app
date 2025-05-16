@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hermes_harbor_flutter_app/models/product.dart';
 
-import '../../dummy/dummy_products.dart';
 import 'two_product_view.dart';
 
 class VerticalProductsView extends StatelessWidget {
-  const VerticalProductsView({super.key});
+  final List<Product> demoProducts;
+
+  const VerticalProductsView({
+    super.key,
+    required this.demoProducts,
+  });
 
   @override
   Widget build(BuildContext context) {

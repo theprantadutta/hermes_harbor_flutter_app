@@ -132,9 +132,19 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
       child: Scaffold(
         extendBodyBehindAppBar: false,
         resizeToAvoidBottomInset: false,
-        body: AnnotatedRegion(
-          value: getDefaultSystemUiStyle(isDarkTheme),
-          child: kTopLevelPages[selectedIndex],
+        body: Stack(
+          children: [
+            AnnotatedRegion(
+              value: getDefaultSystemUiStyle(isDarkTheme),
+              child: kTopLevelPages[selectedIndex],
+            ),
+            // kDebugMode
+            //     ? Positioned(
+            //         bottom: kBottomNavigationBarHeight + 40,
+            //         right: 10,
+            //         child: const FloatingThemeChangeButton())
+            //     : SizedBox(),
+          ],
         ),
         extendBody: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -155,16 +165,12 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
               elevation: 8,
               shadowColor: kPrimaryColor.withValues(alpha: 0.3),
               child: Container(
-                height: MediaQuery.sizeOf(context).height * 0.09,
+                height: MediaQuery.sizeOf(context).height * 0.1,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.white,
-                      Colors.white.withValues(alpha: 0.96),
-                    ],
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: getDefaultGradient(
+                    Colors.white,
+                    Colors.white.withValues(alpha: 0.96),
                   ),
                 ),
                 child: Row(
@@ -229,9 +235,9 @@ class _NavItem extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: 300.ms,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(15),
           color: isActive
               ? kPrimaryColor.withValues(alpha: 0.15)
               : Colors.transparent,

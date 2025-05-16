@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
 
 import '../../screens/view_all_screen.dart';
 
@@ -115,12 +116,18 @@ class PremiumCategoryCard extends StatelessWidget {
   final CategoryModel category;
   const PremiumCategoryCard({super.key, required this.category});
 
-  _handleCategoryTap(context, String name) {}
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _handleCategoryTap(context, category.name),
+      onTap: () {
+        // _handleCategoryTap(context, category.name);
+        context.push(
+          ViewAllScreen.kRouteName,
+          extra: ViewAllScreenArguments(
+            category: category.name,
+          ),
+        );
+      },
       child: SizedBox(
         width: MediaQuery.sizeOf(context).width * 0.35,
         child: Card(
@@ -138,8 +145,8 @@ class PremiumCategoryCard extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      category.color.withOpacity(0.8),
-                      category.color.withOpacity(0.4),
+                      category.color.withValues(alpha: 0.8),
+                      category.color.withValues(alpha: 0.4),
                     ],
                   ),
                 ),
@@ -184,7 +191,7 @@ class PremiumCategoryCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -204,7 +211,7 @@ class PremiumCategoryCard extends StatelessWidget {
                         letterSpacing: 1.2,
                         shadows: [
                           Shadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha: 0.3),
                             blurRadius: 4,
                             offset: const Offset(1, 1),
                           ),
