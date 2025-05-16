@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hermes_harbor_flutter_app/models/order.dart';
 import 'package:hermes_harbor_flutter_app/screen_arguments/view_all_screen_arguments.dart';
 import 'package:hermes_harbor_flutter_app/screens/account_screens/address_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/account_screens/my_orders_screen.dart';
@@ -13,7 +14,9 @@ import '../screen_arguments/product_detail_screen_arguments.dart';
 import '../screens/account_screens/help_and_support_screen.dart';
 import '../screens/account_screens/payment_methods_screen.dart';
 import '../screens/account_screens/setting_screen.dart';
+import '../screens/checkout_screen.dart';
 import '../screens/login_screen.dart';
+import '../screens/order_confirmation_screen.dart';
 import '../screens/tab_screens/cart_screen.dart';
 import '../screens/tab_screens/home_screen.dart';
 import 'bottom_navigation/bottom_navigation_layout.dart';
@@ -269,6 +272,32 @@ class AppNavigation {
         builder: (context, state) {
           return HelpAndSupportScreen(
             key: state.pageKey,
+          );
+        },
+      ),
+
+      /// Checkout Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: CheckoutScreen.kRouteName,
+        name: "Checkout",
+        builder: (context, state) {
+          return CheckoutScreen(
+            key: state.pageKey,
+          );
+        },
+      ),
+
+      /// OrderConfirmationScreen Screen
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: OrderConfirmationScreen.kRouteName,
+        name: "Order Confirmation",
+        builder: (context, state) {
+          final args = state.extra as Order;
+          return OrderConfirmationScreen(
+            key: state.pageKey,
+            order: args,
           );
         },
       ),

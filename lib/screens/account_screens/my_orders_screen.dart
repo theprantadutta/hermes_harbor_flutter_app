@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hermes_harbor_flutter_app/components/layouts/main_layout.dart';
+import 'package:hermes_harbor_flutter_app/screens/order_confirmation_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 import 'package:intl/intl.dart';
 
@@ -94,6 +95,7 @@ class MyOrdersScreen extends StatelessWidget {
 
   Widget _buildOrderCard(BuildContext context, Order order) {
     final theme = Theme.of(context);
+    final kPrimaryColor = theme.primaryColor;
 
     return Container(
       margin: const EdgeInsets.all(16),
@@ -186,32 +188,54 @@ class MyOrdersScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          // Track order
+                      child: GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Track Order coming soon!'),
+                            ),
+                          );
                         },
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: kPrimaryColor.withValues(alpha: 0.5)),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Track Order',
+                              style: TextStyle(color: kPrimaryColor),
+                            ),
                           ),
                         ),
-                        child: const Text('Track Order'),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // View details
+                      child: GestureDetector(
+                        onTap: () {
+                          context.push(
+                            OrderConfirmationScreen.kRouteName,
+                            extra: order,
+                          );
                         },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
+                            color: kPrimaryColor.withValues(alpha: 0.7),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'View Details',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-                        child: const Text('View Details'),
                       ),
                     ),
                   ],

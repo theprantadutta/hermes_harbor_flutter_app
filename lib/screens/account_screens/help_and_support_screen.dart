@@ -22,7 +22,7 @@ class HelpAndSupportScreen extends StatelessWidget {
               delegate: SliverChildListDelegate([
                 Text(
                   'How can we help you?',
-                  style: GoogleFonts.playfairDisplay(
+                  style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
                   ),
@@ -62,7 +62,7 @@ class HelpAndSupportScreen extends StatelessWidget {
                   title: 'Email Support',
                   subtitle: 'Send us an email and we\'ll get back to you',
                   color: Colors.orange,
-                  onTap: () => _launchEmailSupport(context),
+                  onTap: () => _showComingSoon(context, 'Email Support'),
                 ).animate().fadeIn(delay: 300.ms).slideX(begin: -0.1),
 
                 _buildSupportCard(
@@ -71,7 +71,7 @@ class HelpAndSupportScreen extends StatelessWidget {
                   title: 'Call Support',
                   subtitle: 'Talk directly to our support team',
                   color: Colors.purple,
-                  onTap: () => _callSupport(context),
+                  onTap: () => _showComingSoon(context, 'Call Support'),
                 ).animate().fadeIn(delay: 400.ms).slideX(begin: -0.1),
 
                 const SizedBox(height: 32),
@@ -121,13 +121,13 @@ class HelpAndSupportScreen extends StatelessWidget {
     required Color color,
     required VoidCallback onTap,
   }) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final kPrimaryColor = Theme.of(context).primaryColor;
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Material(
         borderRadius: BorderRadius.circular(16),
-        color: isDarkMode ? Colors.grey[900] : Colors.white,
-        elevation: 2,
+        color: kPrimaryColor.withValues(alpha: 0.05),
+        elevation: 0,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: onTap,

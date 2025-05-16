@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/selectors.dart';
+import 'floating_cart_button.dart';
+import 'nav_item.dart';
 import 'top_level_pages.dart';
 
 class BottomNavigationLayout extends StatefulWidget {
@@ -176,25 +177,25 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _NavItem(
+                    NavItem(
                       icon: Icons.home_outlined,
                       selectedIcon: Icons.home_rounded,
                       label: "Home",
                       isActive: selectedIndex == 0,
                       onTap: () => _updateCurrentPageIndex(0),
                     ),
-                    _NavItem(
+                    NavItem(
                       icon: Icons.favorite_outline,
                       selectedIcon: Icons.favorite_rounded,
                       label: "Wishlist",
                       isActive: selectedIndex == 1,
                       onTap: () => _updateCurrentPageIndex(1),
                     ),
-                    _FloatingCartButton(
+                    FloatingCartButton(
                       isActive: selectedIndex == 2,
                       onTap: () => _updateCurrentPageIndex(2),
                     ),
-                    _NavItem(
+                    NavItem(
                       icon: Icons.person_2_outlined,
                       selectedIcon: Icons.person_2_rounded,
                       label: "Account",
@@ -203,119 +204,6 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
                     ),
                   ],
                 ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Custom Nav Item Widget
-class _NavItem extends StatelessWidget {
-  final IconData icon;
-  final IconData selectedIcon;
-  final String label;
-  final bool isActive;
-  final VoidCallback onTap;
-
-  const _NavItem({
-    required this.icon,
-    required this.selectedIcon,
-    required this.label,
-    required this.isActive,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final kPrimaryColor = Theme.of(context).primaryColor;
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: 300.ms,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: isActive
-              ? kPrimaryColor.withValues(alpha: 0.15)
-              : Colors.transparent,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              isActive ? selectedIcon : icon,
-              size: 20,
-              color: isActive ? kPrimaryColor : Colors.grey[600],
-            ),
-            Text(
-              label,
-              style: GoogleFonts.raleway(
-                fontSize: 12,
-                fontWeight: isActive ? FontWeight.w800 : FontWeight.w600,
-                color: isActive ? kPrimaryColor : Colors.grey[600],
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Floating Cart Button Widget
-class _FloatingCartButton extends StatelessWidget {
-  final bool isActive;
-  final VoidCallback onTap;
-
-  const _FloatingCartButton({
-    required this.isActive,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final kPrimaryColor = Theme.of(context).primaryColor;
-    return GestureDetector(
-      onTap: onTap,
-      child: Animate(
-        effects: [ScaleEffect(duration: 300.ms)],
-        child: Container(
-          width: 56,
-          height: 56,
-          margin: const EdgeInsets.only(bottom: 24),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isActive
-                  ? [kPrimaryColor, kPrimaryColor.withValues(alpha: 0.8)]
-                  : [Colors.grey[800]!, Colors.grey[600]!],
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: kPrimaryColor.withValues(alpha: isActive ? 0.4 : 0.1),
-                blurRadius: 12,
-                spreadRadius: 2,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Center(
-            child: Badge(
-              // label: Text('3'), // Uncomment for cart count
-              backgroundColor: Colors.white,
-              textColor: kPrimaryColor,
-              child: Icon(
-                isActive
-                    ? Icons.shopping_bag_rounded
-                    : Icons.shopping_bag_outlined,
-                color: Colors.white,
-                size: 26,
               ),
             ),
           ),

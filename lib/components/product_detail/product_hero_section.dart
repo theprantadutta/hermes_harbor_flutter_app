@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hermes_harbor_flutter_app/screens/tab_screens/cart_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductHeroSection extends StatefulWidget {
@@ -77,6 +79,18 @@ class _ProductHeroSectionState extends State<ProductHeroSection> {
             elevation: 0,
             child: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
+          ),
+        ),
+
+        // --- Back Button ---
+        Positioned(
+          top: MediaQuery.of(context).padding.top + 12,
+          right: 12,
+          child: FloatingActionButton.small(
+            backgroundColor: Colors.white.withValues(alpha: 0.3),
+            elevation: 0,
+            child: const Icon(Icons.shopping_bag_outlined, color: Colors.white),
+            onPressed: () => context.push(CartScreen.kRouteName),
           ),
         ),
 

@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/selectors.dart';
-import 'constants/shared_preference_keys.dart';
 import 'navigation/app_navigation.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -28,7 +27,6 @@ class _MyAppState extends State<MyApp> {
   ThemeMode _themeMode = ThemeMode.light;
   FlexScheme _flexScheme = kDefaultFlexTheme;
   bool _isBiometricEnabled = false;
-  SharedPreferences? _sharedPreferences;
 
   /// This is needed for components that may have a different theme data
   bool get isDarkMode => _themeMode == ThemeMode.dark;
@@ -38,45 +36,24 @@ class _MyAppState extends State<MyApp> {
   void changeBiometricEnabledEnabled(bool isisBiometricEnabled) {
     setState(() {
       _isBiometricEnabled = isisBiometricEnabled;
-      _sharedPreferences?.setBool(kBiometricKey, isisBiometricEnabled);
     });
   }
 
   void changeFlexScheme(FlexScheme flexScheme) {
     setState(() {
       _flexScheme = flexScheme;
-      _sharedPreferences?.setString(kFlexSchemeKey, flexScheme.name);
     });
   }
 
   void changeTheme(ThemeMode themeMode) {
     setState(() {
       _themeMode = themeMode;
-      _sharedPreferences?.setBool(kIsDarkModeKey, themeMode == ThemeMode.dark);
     });
-  }
-
-  void initializeSharedPreferences() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    final isDarkMode = _sharedPreferences?.getBool(kIsDarkModeKey);
-    if (isDarkMode != null) {
-      setState(
-          () => _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light);
-    }
-    final flexScheme = _sharedPreferences?.getString(kFlexSchemeKey);
-    if (flexScheme != null) {
-      setState(() => _flexScheme = FlexScheme.values.byName(flexScheme));
-    }
-    final isFingerPrintEnabled = _sharedPreferences?.getBool(kBiometricKey);
-    if (isFingerPrintEnabled != null) {
-      setState(() => _isBiometricEnabled = isFingerPrintEnabled);
-    }
   }
 
   @override
   void initState() {
     super.initState();
-    initializeSharedPreferences();
   }
 
   @override

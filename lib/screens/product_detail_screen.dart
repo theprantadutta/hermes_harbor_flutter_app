@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanoid2/nanoid2.dart';
 
 import '../components/product_detail/add_to_cart_bar.dart';
 import '../components/product_detail/product_description.dart';
@@ -9,9 +11,11 @@ import '../components/product_detail/product_reviews_section.dart';
 import '../components/product_detail/recommended_products.dart';
 import '../dummy/dummy_reviews.dart';
 import '../dummy/product_list.dart';
+import '../models/cart.dart';
 import '../models/product.dart';
+import '../riverpods/cart_list_provider.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends ConsumerStatefulWidget {
   static const kRouteName = '/product-detail';
   final Product product;
 
@@ -19,6 +23,14 @@ class ProductDetailScreen extends StatelessWidget {
     super.key,
     required this.product,
   });
+
+  @override
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +48,7 @@ class ProductDetailScreen extends StatelessWidget {
               systemOverlayStyle: SystemUiOverlayStyle.light,
               expandedHeight: height,
               flexibleSpace: ProductHeroSection(
-                images: product.images,
+                images: widget.product.images,
               ),
               pinned: true,
               collapsedHeight: MediaQuery.sizeOf(context).height * 0.3,
@@ -50,13 +62,10 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ProductInfoSection(
-                    title: product.name,
-                    price: product.price,
-                    rating: product.rating,
-                    availableColors: product.availableColors,
+                    product: widget.product,
                   ),
                   const SizedBox(height: 20),
-                  ProductDescription(description: product.description),
+                  ProductDescription(description: widget.product.description),
                   const SizedBox(height: 15),
                 ],
               ),
@@ -72,8 +81,8 @@ class ProductDetailScreen extends StatelessWidget {
             const SliverToBoxAdapter(child: SizedBox(height: 20)),
             SliverToBoxAdapter(
               child: ProductReviewsSection(
-                averageRating: product.rating,
-                reviewCount: product.reviewCount,
+                averageRating: widget.product.rating,
+                reviewCount: widget.product.reviewCount,
                 reviews: dummyReviews,
               ),
             ),
@@ -82,7 +91,27 @@ class ProductDetailScreen extends StatelessWidget {
       ),
 
       // --- Sticky Add-to-Cart Bar ---
-      bottomNavigationBar: AddToCartBar(),
+      bottomNavigationBar: AddToCartBar(
+        quantity: quantity,
+        increment: () => setState(() => quantity++),
+        decrement: () {
+          if (quantity == 1) return;
+          setState(() => quantity--);
+        },
+        addToCart: () {
+          ref.read(cartListProvider.notifier).addToCart(
+                Cart(
+                  id: nanoid(),
+                  product: widget.product,
+                  quantity: quantity,
+                  totalPrice: widget.product.price * quantity,
+                ),
+              );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${widget.product.name} added to cart!')),
+          );
+        },
+      ),
     );
   }
 }

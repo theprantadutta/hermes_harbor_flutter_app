@@ -93,11 +93,11 @@ class _AddressScreenState extends State<AddressScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
-                        vertical: 2,
+                        vertical: 5,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.green.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: const Text(
                         'DEFAULT',
@@ -141,22 +141,33 @@ class _AddressScreenState extends State<AddressScreen> {
                     const Text('New York, NY 10005'),
                     const Text('United States'),
                     const SizedBox(height: 4),
-                    OutlinedButton(
-                      onPressed: () {
-                        // Set as default
+                    GestureDetector(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Set as default address!'),
+                          ),
+                        );
                       },
-                      style: OutlinedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                        minimumSize: const Size(0, 0),
-                        side: const BorderSide(color: Colors.blue),
-                      ),
-                      child: const Text(
-                        'SET AS DEFAULT',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
+                      child: Container(
+                        width: 120,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue, width: 1),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Center(
+                          child: const Text(
+                            'SET AS DEFAULT',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -183,6 +194,7 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   Widget _buildAddNewAddressSection(BuildContext context) {
+    final kPrimaryColor = Theme.of(context).primaryColor;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -373,8 +385,8 @@ class _AddressScreenState extends State<AddressScreen> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
                       if (_formKey.currentState!.validate()) {
                         // Save address logic
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -384,17 +396,22 @@ class _AddressScreenState extends State<AddressScreen> {
                         Navigator.pop(context);
                       }
                     },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: kPrimaryColor.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                    ),
-                    child: const Text(
-                      'SAVE ADDRESS',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                      child: const Center(
+                        child: Text(
+                          'SAVE ADDRESS',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),

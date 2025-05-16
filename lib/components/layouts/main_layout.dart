@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-
-import '../shared/floating_theme_change_button.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget body;
@@ -32,9 +29,9 @@ class MainLayout extends StatelessWidget {
           child: body,
         ),
       ),
-      floatingActionButton: kReleaseMode
-          ? null // Don't show FloatingActionButton in release (production) mode
-          : const FloatingThemeChangeButton(),
+      // floatingActionButton: kReleaseMode
+      //     ? null // Don't show FloatingActionButton in release (production) mode
+      //     : const FloatingThemeChangeButton(),
     );
   }
 }

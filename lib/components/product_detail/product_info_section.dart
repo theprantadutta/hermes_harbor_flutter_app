@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart' as flutter_animate;
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductInfoSection extends StatelessWidget {
-  final String title;
-  final double price;
-  final double rating;
-  final List<Color> availableColors;
-  final String brand;
+import '../../models/product.dart';
+import '../../riverpods/wishlist_provider.dart';
+
+class ProductInfoSection extends ConsumerWidget {
+  final Product product;
 
   const ProductInfoSection({
     super.key,
-    required this.title,
-    required this.price,
-    required this.rating,
-    required this.availableColors,
-    this.brand = 'HERMES HARBOR',
+    required this.product,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final isInWishlist = ref.watch(wishlistProvider).contains(product);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // --- Brand Tag ---
-          flutter_animate.Animate(
-            effects: [flutter_animate.FadeEffect(delay: 150.ms)],
+          Animate(
+            effects: [FadeEffect(delay: 150.ms)],
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
@@ -36,7 +33,7 @@ class ProductInfoSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
-                brand.toUpperCase(),
+                product.brand.toUpperCase(),
                 style: GoogleFonts.raleway(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -49,16 +46,16 @@ class ProductInfoSection extends StatelessWidget {
           const SizedBox(height: 12),
 
           // --- Luxury Title ---
-          flutter_animate.Animate(
+          Animate(
             effects: [
-              flutter_animate.FadeEffect(delay: 200.ms),
-              flutter_animate.SlideEffect(
+              FadeEffect(delay: 200.ms),
+              SlideEffect(
                 begin: const Offset(0, 0.1),
                 curve: Curves.easeOutCubic,
               )
             ],
             child: Text(
-              title,
+              product.name,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -72,8 +69,8 @@ class ProductInfoSection extends StatelessWidget {
           const SizedBox(height: 4),
 
           // --- Price with Currency ---
-          flutter_animate.Animate(
-            effects: [flutter_animate.FadeEffect(delay: 250.ms)],
+          Animate(
+            effects: [FadeEffect(delay: 250.ms)],
             child: Text.rich(
               TextSpan(
                 children: [
@@ -86,7 +83,7 @@ class ProductInfoSection extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: price.toStringAsFixed(2),
+                    text: product.price.toStringAsFixed(2),
                     style: GoogleFonts.playfairDisplay(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
@@ -100,8 +97,8 @@ class ProductInfoSection extends StatelessWidget {
           const SizedBox(height: 10),
 
           // --- Rating & Actions Row ---
-          flutter_animate.Animate(
-            effects: [flutter_animate.FadeEffect(delay: 300.ms)],
+          Animate(
+            effects: [FadeEffect(delay: 300.ms)],
             child: Row(
               children: [
                 // Rating Chip
@@ -122,7 +119,7 @@ class ProductInfoSection extends StatelessWidget {
                           color: Colors.amber[700], size: 18),
                       const SizedBox(width: 6),
                       Text(
-                        '$rating (142)',
+                        '${product.rating} (142)',
                         style: GoogleFonts.raleway(
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
@@ -136,13 +133,29 @@ class ProductInfoSection extends StatelessWidget {
                 _buildIconButton(
                   context: context,
                   icon: Icons.share_outlined,
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Not Implemented'),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(width: 8),
                 _buildIconButton(
                   context: context,
-                  icon: Icons.favorite_border,
-                  onPressed: () {},
+                  icon: isInWishlist ? Icons.favorite : Icons.favorite_border,
+                  onPressed: () {
+                    if (isInWishlist) {
+                      ref
+                          .read(wishlistProvider.notifier)
+                          .removeFromWishlist(product);
+                    } else {
+                      ref
+                          .read(wishlistProvider.notifier)
+                          .addToWishlist(product);
+                    }
+                  },
                 ),
               ],
             ),
@@ -150,8 +163,8 @@ class ProductInfoSection extends StatelessWidget {
           const SizedBox(height: 10),
 
           // --- Color Selection ---
-          flutter_animate.Animate(
-            effects: [flutter_animate.FadeEffect(delay: 350.ms)],
+          Animate(
+            effects: [FadeEffect(delay: 350.ms)],
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -168,10 +181,10 @@ class ProductInfoSection extends StatelessWidget {
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children: availableColors.map((color) {
+                  children: product.availableColors.map((color) {
                     return _ColorChip(
                       color: color,
-                      isSelected: color == availableColors.first,
+                      isSelected: color == product.availableColors.first,
                       onSelected: () => () {},
                     );
                   }).toList(),
