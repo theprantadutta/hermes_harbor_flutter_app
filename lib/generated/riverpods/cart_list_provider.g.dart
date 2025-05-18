@@ -6,7 +6,7 @@ part of '../../riverpods/cart_list_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cartListHash() => r'1ceb771be9459529a9c4b9e265080cce190a4cf3';
+String _$cartListHash() => r'ac1c21d3af54b09dc3708a6e3efd46d940457f4e';
 
 /// See also [CartList].
 @ProviderFor(CartList)
