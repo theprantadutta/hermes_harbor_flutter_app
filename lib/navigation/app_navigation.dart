@@ -8,7 +8,6 @@ import 'package:hermes_harbor_flutter_app/screens/product_detail_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/account_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/tab_screens/wishlist_screen.dart';
 import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
-import 'package:heroine/heroine.dart';
 
 import '../screen_arguments/product_detail_screen_arguments.dart';
 import '../screens/account_screens/help_and_support_screen.dart';
@@ -44,7 +43,6 @@ class AppNavigation {
     initialLocation: initial,
     debugLogDiagnostics: true,
     navigatorKey: rootNavigatorKey,
-    observers: [HeroineController()],
     routes: [
       // /// OnBoardingScreen
       // GoRoute(

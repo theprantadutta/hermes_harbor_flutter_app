@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 
 import '../../constants/selectors.dart';
 import '../../dummy/dummy_carousel_items.dart';
@@ -33,13 +35,10 @@ class HomeScreenHeroSection extends StatelessWidget {
                 children: [
                   // Parallax Image Background
                   Positioned.fill(
-                    child: Hero(
-                      tag: 'carousel_${item['id']}',
-                      child: Image.asset(
-                        'assets/carousels/carousel_${item['id']}.jpeg',
-                        fit: BoxFit.cover,
-                        alignment: Alignment.center,
-                      ),
+                    child: Image.asset(
+                      'assets/carousels/carousel_${item['id']}.jpeg',
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
                     ),
                   ),
 
@@ -131,7 +130,9 @@ class HomeScreenHeroSection extends StatelessWidget {
                                   curve: Curves.elasticOut)
                             ],
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.push(ViewAllScreen.kRouteName);
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: color?.withValues(alpha: 0.4),
                                 foregroundColor: Colors.white,

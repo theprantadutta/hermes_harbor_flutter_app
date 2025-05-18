@@ -28,6 +28,7 @@ class _ProductHeroSectionState extends State<ProductHeroSection> {
 
   @override
   Widget build(BuildContext context) {
+    final kPrimaryColor = Theme.of(context).primaryColor;
     return Stack(
       children: [
         // --- Image Gallery ---
@@ -75,7 +76,8 @@ class _ProductHeroSectionState extends State<ProductHeroSection> {
           top: MediaQuery.of(context).padding.top + 12,
           left: 12,
           child: FloatingActionButton.small(
-            backgroundColor: Colors.white.withValues(alpha: 0.3),
+            heroTag: UniqueKey(),
+            backgroundColor: kPrimaryColor.withValues(alpha: 0.3),
             elevation: 0,
             child: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
@@ -87,7 +89,8 @@ class _ProductHeroSectionState extends State<ProductHeroSection> {
           top: MediaQuery.of(context).padding.top + 12,
           right: 12,
           child: FloatingActionButton.small(
-            backgroundColor: Colors.white.withValues(alpha: 0.3),
+            heroTag: UniqueKey(),
+            backgroundColor: kPrimaryColor.withValues(alpha: 0.3),
             elevation: 0,
             child: const Icon(Icons.shopping_bag_outlined, color: Colors.white),
             onPressed: () => context.push(CartScreen.kRouteName),
