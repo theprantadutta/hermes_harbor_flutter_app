@@ -4,6 +4,8 @@ Hermes Harbor is a luxury fashion e-commerce app built with Flutter, featuring p
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-3.19-blue?style=flat-square&logo=flutter)](https://flutter.dev)
 [![State Management](https://img.shields.io/badge/State%20Management-Riverpod-orange?style=flat-square)](https://riverpod.dev)
+
+
 [![Download Latest APK](https://img.shields.io/badge/Download-Latest%20APK-brightgreen?style=for-the-badge&logo=android)](https://github.com/theprantadutta/hermes_harbor_flutter_app/releases/latest/download/hermes_harbor.apk)
 
 <p align="center">
