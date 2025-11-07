@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hermes_harbor_flutter_app/screens/view_all_screen.dart';
 
+import '../../constants/design_tokens.dart';
+
 // class SectionTitleWithSeeAll extends StatelessWidget {
 //   final String title;
 
@@ -42,15 +44,16 @@ class SectionTitleWithSeeAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+          style: AppTextStyle.headingSmall(
+            color: isDarkTheme ? Colors.white : Colors.black87,
+          ),
         ),
         TextButton(
           onPressed: () => context.push(ViewAllScreen.kRouteName),
@@ -59,7 +62,12 @@ class SectionTitleWithSeeAll extends StatelessWidget {
             padding: EdgeInsets.zero,
             minimumSize: Size.zero,
           ),
-          child: const Text('See All'),
+          child: Text(
+            'See All',
+            style: AppTextStyle.labelLarge(
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
         ),
       ],
     );
