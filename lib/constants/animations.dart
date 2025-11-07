@@ -393,12 +393,6 @@ class MicroInteractions {
           begin: const Offset(1.0, 1.0),
           end: const Offset(1.02, 1.02),
         ),
-        const ElevateEffect(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.easeOut,
-          begin: Offset(0, 0),
-          end: Offset(0, -4),
-        ),
       ];
 
   /// Heart/like animation

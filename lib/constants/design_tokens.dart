@@ -194,7 +194,7 @@ class AppCurves {
   static const Curve standard = Curves.easeInOut;
   static const Curve emphasized = Curves.easeInOutCubicEmphasized;
   static const Curve decelerate = Curves.decelerate;
-  static const Curve accelerate = Curves.accelerate;
+  static const Curve accelerate = Curves.easeIn;
 
   // Luxury/Premium curves
   static const Curve smooth = Curves.easeInOutQuart;
