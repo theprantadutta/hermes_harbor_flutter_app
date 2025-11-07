@@ -1,11 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hermes_harbor_flutter_app/riverpods/cart_list_provider.dart';
 
+import '../../constants/colors.dart';
+import '../../constants/design_tokens.dart';
 import '../../models/cart.dart';
 import 'quantity_button.dart';
 
-class CartItemCard extends ConsumerWidget {
+class CartItemCard extends ConsumerStatefulWidget {
   final Cart cart;
   final VoidCallback onDelete;
 
@@ -16,100 +20,209 @@ class CartItemCard extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black12, blurRadius: 6, offset: const Offset(0, 2))
-        ],
-      ),
-      child: Row(
-        children: [
-          // Image
-          Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(14),
-                bottomLeft: Radius.circular(14),
-              ),
-              child: Image.network(
-                cart.product.images.first,
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
+  ConsumerState<CartItemCard> createState() => _CartItemCardState();
+}
+
+class _CartItemCardState extends ConsumerState<CartItemCard> {
+  bool _isRemoving = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final kPrimaryColor = Theme.of(context).primaryColor;
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
+    return Dismissible(
+      key: Key(widget.cart.id),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        widget.onDelete();
+      },
+      background: Container(
+        margin: EdgeInsets.symmetric(vertical: AppSpacing.xs),
+        decoration: BoxDecoration(
+          gradient: AppGradients.error,
+          borderRadius: AppRadius.mdRadius,
+        ),
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.only(right: AppSpacing.lg),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.delete_outline,
+              color: Colors.white,
+              size: AppIconSize.lg,
+            ),
+            SizedBox(height: AppSpacing.xxs),
+            Text(
+              'Remove',
+              style: AppTextStyle.labelSmall(
+                color: Colors.white,
+                weight: FontWeight.w600,
               ),
             ),
+          ],
+        ),
+      ),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: AppSpacing.xs),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: isDarkTheme
+                ? [
+                    Colors.grey[850]!.withOpacity(0.9),
+                    Colors.grey[900]!.withOpacity(0.9),
+                  ]
+                : [
+                    Colors.white,
+                    Colors.grey[50]!,
+                  ],
           ),
-
-          // Info
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        cart.product.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        maxLines: 2,
-                      ),
-                    ],
+          borderRadius: AppRadius.mdRadius,
+          boxShadow: AppElevation.medium(Colors.black),
+          border: Border.all(
+            color: isDarkTheme
+                ? Colors.white.withOpacity(0.05)
+                : kPrimaryColor.withOpacity(0.08),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            // Image
+            Padding(
+              padding: EdgeInsets.all(AppSpacing.sm),
+              child: ClipRRect(
+                borderRadius: AppRadius.smRadius,
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: AppElevation.low(Colors.black),
                   ),
-                  const SizedBox(height: 6),
-                  Text("\$${cart.product.price.toStringAsFixed(2)}",
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w500,
-                      )),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      QuantityButton(
+                  child: CachedNetworkImage(
+                    imageUrl: widget.cart.product.images.first,
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      decoration: BoxDecoration(
+                        gradient: AppGradients.shimmer,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Icon(
+                      Icons.error,
+                      color: AppColors.error,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            // Info
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.md,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.cart.product.name,
+                      style: AppTextStyle.bodyMedium(
+                        weight: FontWeight.w600,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: AppSpacing.xs),
+                    Text(
+                      "\$${widget.cart.product.price.toStringAsFixed(2)}",
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: AppTextSize.md,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: AppSpacing.sm),
+                    Row(
+                      children: [
+                        QuantityButton(
                           icon: Icons.remove,
                           onTap: () {
-                            if (cart.quantity == 1) return;
+                            if (widget.cart.quantity == 1) return;
                             ref
                                 .read(cartListProvider.notifier)
-                                .decrementQuantity(cart.product.id);
-                          }),
-                      const SizedBox(width: 8),
-                      Text(
-                        cart.quantity.toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                                .decrementQuantity(widget.cart.product.id);
+                          },
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      QuantityButton(
+                        SizedBox(width: AppSpacing.sm),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSpacing.md,
+                            vertical: AppSpacing.xs,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                kPrimaryColor.withOpacity(0.1),
+                                kPrimaryColor.withOpacity(0.05),
+                              ],
+                            ),
+                            borderRadius: AppRadius.smRadius,
+                            border: Border.all(
+                              color: kPrimaryColor.withOpacity(0.2),
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            widget.cart.quantity.toString(),
+                            style: AppTextStyle.bodyMedium(
+                              weight: FontWeight.bold,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: AppSpacing.sm),
+                        QuantityButton(
                           icon: Icons.add,
                           onTap: () {
                             ref
                                 .read(cartListProvider.notifier)
-                                .incrementQuantity(cart.product.id);
-                          }),
-                      const Spacer(),
-                      IconButton(
-                        icon: const Icon(Icons.close,
-                            size: 20, color: Colors.grey),
-                        onPressed: onDelete,
-                      ),
-                    ],
-                  ),
-                ],
+                                .incrementQuantity(widget.cart.product.id);
+                          },
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() => _isRemoving = true);
+                            Future.delayed(AppDuration.normal, () {
+                              widget.onDelete();
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(AppSpacing.xs),
+                            decoration: BoxDecoration(
+                              color: AppColors.error.withOpacity(0.1),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.delete_outline,
+                              size: AppIconSize.md,
+                              color: AppColors.error,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

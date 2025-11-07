@@ -6,6 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hermes_harbor_flutter_app/riverpods/cart_list_provider.dart';
 import 'package:nanoid2/nanoid2.dart';
 
+import '../../constants/animations.dart';
+import '../../constants/colors.dart';
+import '../../constants/design_tokens.dart';
 import '../../models/cart.dart';
 import '../../models/product.dart';
 import '../../riverpods/wishlist_provider.dart';
@@ -22,6 +25,7 @@ class WishlistProductCard extends ConsumerStatefulWidget {
 
 class _ProductCardState extends ConsumerState<WishlistProductCard> {
   int quantity = 1;
+  bool _heartAnimating = false;
 
   @override
   void initState() {
@@ -31,6 +35,7 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
   @override
   Widget build(BuildContext context) {
     final kPrimaryColor = Theme.of(context).primaryColor;
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     final product = widget.product;
     final isFavorite =
         ref.watch(wishlistProvider).any((p) => p.id == product.id);
@@ -68,21 +73,33 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
           ),
         ),
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 5,
+          margin: EdgeInsets.symmetric(vertical: AppSpacing.sm),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.xs + 1,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(18),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.04),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isDarkTheme
+                  ? [
+                      Colors.grey[850]!.withOpacity(0.9),
+                      Colors.grey[900]!.withOpacity(0.9),
+                    ]
+                  : [
+                      Colors.white,
+                      Colors.grey[50]!,
+                    ],
+            ),
+            borderRadius: AppRadius.lgRadius,
+            boxShadow: AppElevation.medium(Colors.black),
+            border: Border.all(
+              color: isDarkTheme
+                  ? Colors.white.withOpacity(0.05)
+                  : kPrimaryColor.withOpacity(0.08),
+              width: 1,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,23 +108,33 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
               Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: AppRadius.mdRadius,
                     child: CachedNetworkImage(
                       imageUrl: product.images.first,
                       width: double.infinity,
                       height: 180,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          Container(color: Colors.grey[300]),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      placeholder: (context, url) => Container(
+                        decoration: BoxDecoration(
+                          gradient: AppGradients.shimmer,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Icon(
+                        Icons.error,
+                        color: AppColors.error,
+                      ),
                     ),
                   ),
                   Positioned(
-                    top: 10,
-                    right: 10,
+                    top: AppSpacing.sm,
+                    right: AppSpacing.sm,
                     child: GestureDetector(
                       onTap: () {
+                        setState(() => _heartAnimating = true);
+                        Future.delayed(AppDuration.medium, () {
+                          if (mounted) setState(() => _heartAnimating = false);
+                        });
+
                         if (isFavorite) {
                           ref
                               .read(wishlistProvider.notifier)
@@ -118,19 +145,41 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
                               .addToWishlist(product);
                         }
                       },
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
+                      child: Container(
+                        padding: EdgeInsets.all(AppSpacing.sm),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: AppElevation.medium(Colors.black),
+                        ),
                         child: Icon(
                           isFavorite ? Icons.favorite : Icons.favorite_border,
                           color: isFavorite ? Colors.red : Colors.grey,
+                          size: AppIconSize.md,
                         ),
-                      ),
+                      )
+                          .animate(
+                            target: _heartAnimating ? 1 : 0,
+                          )
+                          .scale(
+                            begin: const Offset(1.0, 1.0),
+                            end: const Offset(1.3, 1.3),
+                            duration: AppDuration.fast,
+                            curve: AppCurves.spring,
+                          )
+                          .then()
+                          .scale(
+                            begin: const Offset(1.3, 1.3),
+                            end: const Offset(1.0, 1.0),
+                            duration: AppDuration.fast,
+                            curve: AppCurves.easeOut,
+                          ),
                     ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: AppSpacing.sm),
 
               // Title and Price Row
               Row(
@@ -142,9 +191,8 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
                       product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      style: AppTextStyle.bodyMedium(
+                        weight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -152,33 +200,34 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
                   // Price
                   Text(
                     '\$${product.price.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                    style: AppTextStyle.bodyMedium(
+                      weight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 6),
+              SizedBox(height: AppSpacing.xs + 2),
 
               // Rating
               Row(
                 children: [
-                  const Icon(Icons.star, size: 16, color: Colors.amber),
-                  const SizedBox(width: 4),
+                  Icon(Icons.star, size: AppIconSize.sm, color: Colors.amber),
+                  SizedBox(width: AppSpacing.xs),
                   Text(
                     product.rating.toStringAsFixed(1),
-                    style: const TextStyle(fontSize: 14),
+                    style: AppTextStyle.bodySmall(),
                   ),
                   Text(
                     ' (${product.reviewCount})',
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: AppTextStyle.bodySmall(
+                      color: Colors.grey,
+                    ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: AppSpacing.sm),
 
               // Add to Cart Row
               Row(
@@ -187,13 +236,14 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: kPrimaryColor.withValues(alpha: 0.2)),
-                      borderRadius: BorderRadius.circular(8),
+                        color: kPrimaryColor.withOpacity(0.2),
+                      ),
+                      borderRadius: AppRadius.smRadius,
                     ),
                     child: Row(
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.remove, size: 18),
+                          icon: Icon(Icons.remove, size: AppIconSize.sm),
                           onPressed: () {
                             if (quantity > 1) {
                               setState(() => quantity--);
@@ -202,10 +252,12 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
                         ),
                         Text(
                           '$quantity',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: AppTextStyle.bodyMedium(
+                            weight: FontWeight.bold,
+                          ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.add, size: 18),
+                          icon: Icon(Icons.add, size: AppIconSize.sm),
                           onPressed: () {
                             setState(() => quantity++);
                           },
@@ -213,60 +265,73 @@ class _ProductCardState extends ConsumerState<WishlistProductCard> {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: AppSpacing.md),
 
                   // Add to Cart Button
                   Expanded(
-                      child: GestureDetector(
-                    onTap: () {
-                      ref.read(cartListProvider.notifier).addToCart(
-                            Cart(
-                              id: nanoid(),
-                              product: product,
-                              quantity: quantity,
-                              totalPrice: product.price * quantity,
+                    child: GestureDetector(
+                      onTap: () {
+                        ref.read(cartListProvider.notifier).addToCart(
+                              Cart(
+                                id: nanoid(),
+                                product: product,
+                                quantity: quantity,
+                                totalPrice: product.price * quantity,
+                              ),
+                            );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Text('Product added to cart!'),
+                            backgroundColor: AppColors.success,
+                            behavior: SnackBarBehavior.floating,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: AppRadius.mdRadius,
                             ),
-                          );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Product added to cart!'),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: AppSpacing.sm),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              kPrimaryColor.withOpacity(0.8),
+                              kPrimaryColor,
+                            ],
+                          ),
+                          borderRadius: AppRadius.mdRadius,
+                          boxShadow: AppElevation.low(kPrimaryColor),
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        color: kPrimaryColor.withValues(alpha: 0.7),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.shopping_cart_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 5),
-                          const Text(
-                            'Add to Cart',
-                            style: TextStyle(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.shopping_cart_outlined,
                               color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              size: AppIconSize.md,
                             ),
-                          ),
-                        ],
+                            SizedBox(width: AppSpacing.xs + 1),
+                            Text(
+                              'Add to Cart',
+                              style: AppTextStyle.bodyMedium(
+                                color: Colors.white,
+                                weight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  )),
+                  ),
                 ],
               ),
             ],
           ),
-        )
-            .animate()
-            .fadeIn(duration: 300.ms)
-            .slideY(begin: 0.1, duration: 300.ms),
+        ).animate().fadeIn(duration: AppDuration.normal).slideY(
+              begin: 0.1,
+              duration: AppDuration.normal,
+              curve: AppCurves.luxury,
+            ),
       ),
     );
   }
