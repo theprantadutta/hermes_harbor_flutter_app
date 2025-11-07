@@ -1,7 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../../constants/animations.dart';
+import '../../constants/colors.dart';
+import '../../constants/design_tokens.dart';
 import '../../constants/selectors.dart';
 import 'floating_cart_button.dart';
 import 'nav_item.dart';
@@ -150,59 +155,80 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
         extendBody: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Animate(
-          effects: [
-            SlideEffect(
-              begin: const Offset(0, 1),
-              duration: 800.ms,
-              curve: Curves.fastOutSlowIn,
-            ),
-            FadeEffect(duration: 800.ms),
-          ],
+          effects: AppAnimations.fadeSlideInFromBottom(
+            duration: AppDuration.slower,
+            curve: AppCurves.luxury,
+          ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-            child: PhysicalModel(
-              borderRadius: BorderRadius.circular(24),
-              color: kPrimaryColor.withValues(alpha: 0.5),
-              elevation: 8,
-              shadowColor: kPrimaryColor.withValues(alpha: 0.3),
-              child: Container(
-                height: MediaQuery.sizeOf(context).height * 0.1,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: getDefaultGradient(
-                    Colors.white,
-                    Colors.white.withValues(alpha: 0.96),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpacing.base,
+              vertical: AppSpacing.md,
+            ),
+            child: ClipRRect(
+              borderRadius: AppRadius.xxlRadius,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  height: AppSizes.bottomNavHeight,
+                  decoration: BoxDecoration(
+                    borderRadius: AppRadius.xxlRadius,
+                    gradient: isDarkTheme
+                        ? LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.grey[900]!.withOpacity(0.9),
+                              Colors.grey[850]!.withOpacity(0.85),
+                            ],
+                          )
+                        : LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.white.withOpacity(0.95),
+                              Colors.white.withOpacity(0.9),
+                            ],
+                          ),
+                    boxShadow: AppElevation.extraHigh(
+                      kPrimaryColor.withOpacity(0.15),
+                    ),
+                    border: Border.all(
+                      color: isDarkTheme
+                          ? Colors.white.withOpacity(0.1)
+                          : kPrimaryColor.withOpacity(0.1),
+                      width: 1,
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    NavItem(
-                      icon: Icons.home_outlined,
-                      selectedIcon: Icons.home_rounded,
-                      label: "Home",
-                      isActive: selectedIndex == 0,
-                      onTap: () => _updateCurrentPageIndex(0),
-                    ),
-                    NavItem(
-                      icon: Icons.favorite_outline,
-                      selectedIcon: Icons.favorite_rounded,
-                      label: "Wishlist",
-                      isActive: selectedIndex == 1,
-                      onTap: () => _updateCurrentPageIndex(1),
-                    ),
-                    FloatingCartButton(
-                      isActive: selectedIndex == 2,
-                      onTap: () => _updateCurrentPageIndex(2),
-                    ),
-                    NavItem(
-                      icon: Icons.person_2_outlined,
-                      selectedIcon: Icons.person_2_rounded,
-                      label: "Account",
-                      isActive: selectedIndex == 3,
-                      onTap: () => _updateCurrentPageIndex(3),
-                    ),
-                  ],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      NavItem(
+                        icon: Icons.home_outlined,
+                        selectedIcon: Icons.home_rounded,
+                        label: "Home",
+                        isActive: selectedIndex == 0,
+                        onTap: () => _updateCurrentPageIndex(0),
+                      ),
+                      NavItem(
+                        icon: Icons.favorite_outline,
+                        selectedIcon: Icons.favorite_rounded,
+                        label: "Wishlist",
+                        isActive: selectedIndex == 1,
+                        onTap: () => _updateCurrentPageIndex(1),
+                      ),
+                      FloatingCartButton(
+                        isActive: selectedIndex == 2,
+                        onTap: () => _updateCurrentPageIndex(2),
+                      ),
+                      NavItem(
+                        icon: Icons.person_2_outlined,
+                        selectedIcon: Icons.person_2_rounded,
+                        label: "Account",
+                        isActive: selectedIndex == 3,
+                        onTap: () => _updateCurrentPageIndex(3),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
