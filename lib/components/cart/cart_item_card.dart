@@ -72,8 +72,8 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
             end: Alignment.bottomRight,
             colors: isDarkTheme
                 ? [
-                    Colors.grey[850]!.withOpacity(0.9),
-                    Colors.grey[900]!.withOpacity(0.9),
+                    Colors.grey[850]!.withValues(alpha: 0.9),
+                    Colors.grey[900]!.withValues(alpha: 0.9),
                   ]
                 : [
                     Colors.white,
@@ -84,8 +84,8 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
           boxShadow: AppElevation.medium(Colors.black),
           border: Border.all(
             color: isDarkTheme
-                ? Colors.white.withOpacity(0.05)
-                : kPrimaryColor.withOpacity(0.08),
+                ? Colors.white.withValues(alpha: 0.05)
+                : kPrimaryColor.withValues(alpha: 0.08),
             width: 1,
           ),
         ),
@@ -167,13 +167,13 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                kPrimaryColor.withOpacity(0.1),
-                                kPrimaryColor.withOpacity(0.05),
+                                kPrimaryColor.withValues(alpha: 0.1),
+                                kPrimaryColor.withValues(alpha: 0.05),
                               ],
                             ),
                             borderRadius: AppRadius.smRadius,
                             border: Border.all(
-                              color: kPrimaryColor.withOpacity(0.2),
+                              color: kPrimaryColor.withValues(alpha: 0.2),
                               width: 1,
                             ),
                           ),
@@ -205,7 +205,7 @@ class _CartItemCardState extends ConsumerState<CartItemCard> {
                           child: Container(
                             padding: EdgeInsets.all(AppSpacing.xs),
                             decoration: BoxDecoration(
-                              color: AppColors.error.withOpacity(0.1),
+                              color: AppColors.error.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(

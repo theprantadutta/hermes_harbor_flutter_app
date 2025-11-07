@@ -82,7 +82,7 @@ class _QuantityButtonState extends State<QuantityButton>
             ),
             borderRadius: AppRadius.smRadius,
             border: Border.all(
-              color: kPrimaryColor.withOpacity(0.15),
+              color: kPrimaryColor.withValues(alpha: 0.15),
               width: 1,
             ),
             boxShadow: AppElevation.subtle(Colors.black),

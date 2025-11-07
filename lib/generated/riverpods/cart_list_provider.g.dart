@@ -6,19 +6,51 @@ part of '../../riverpods/cart_list_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(CartList)
+const cartListProvider = CartListProvider._();
+
+final class CartListProvider extends $NotifierProvider<CartList, List<Cart>> {
+  const CartListProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'cartListProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$cartListHash();
+
+  @$internal
+  @override
+  CartList create() => CartList();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<Cart> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<Cart>>(value),
+    );
+  }
+}
+
 String _$cartListHash() => r'ac1c21d3af54b09dc3708a6e3efd46d940457f4e';
 
-/// See also [CartList].
-@ProviderFor(CartList)
-final cartListProvider = NotifierProvider<CartList, List<Cart>>.internal(
-  CartList.new,
-  name: r'cartListProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$cartListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CartList = Notifier<List<Cart>>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$CartList extends $Notifier<List<Cart>> {
+  List<Cart> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<List<Cart>, List<Cart>>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<List<Cart>, List<Cart>>, List<Cart>, Object?, Object?>;
+    element.handleValue(ref, created);
+  }
+}

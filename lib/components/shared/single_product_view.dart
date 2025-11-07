@@ -81,8 +81,8 @@ class _SingleProductViewState extends State<SingleProductView> {
                       end: Alignment.bottomRight,
                       colors: isDarkTheme
                           ? [
-                              Colors.grey[850]!.withOpacity(0.9),
-                              Colors.grey[900]!.withOpacity(0.9),
+                              Colors.grey[850]!.withValues(alpha: 0.9),
+                              Colors.grey[900]!.withValues(alpha: 0.9),
                             ]
                           : [
                               Colors.white,
@@ -92,15 +92,15 @@ class _SingleProductViewState extends State<SingleProductView> {
                     boxShadow: [
                       ...AppElevation.medium(Colors.black),
                       BoxShadow(
-                        color: kPrimaryColor.withOpacity(0.08),
+                        color: kPrimaryColor.withValues(alpha: 0.08),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
                     ],
                     border: Border.all(
                       color: isDarkTheme
-                          ? Colors.white.withOpacity(0.05)
-                          : kPrimaryColor.withOpacity(0.1),
+                          ? Colors.white.withValues(alpha: 0.05)
+                          : kPrimaryColor.withValues(alpha: 0.1),
                       width: 1,
                     ),
                   ),
@@ -147,7 +147,7 @@ class _SingleProductViewState extends State<SingleProductView> {
                                       end: Alignment.bottomCenter,
                                       colors: [
                                         Colors.transparent,
-                                        Colors.black.withOpacity(0.02),
+                                        Colors.black.withValues(alpha: 0.02),
                                       ],
                                     ),
                                   ),
@@ -159,7 +159,7 @@ class _SingleProductViewState extends State<SingleProductView> {
                                 right: AppSpacing.sm,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.7),
+                                    color: Colors.black.withValues(alpha: 0.7),
                                     shape: BoxShape.circle,
                                     boxShadow: AppElevation.subtle(Colors.black),
                                   ),
@@ -190,13 +190,13 @@ class _SingleProductViewState extends State<SingleProductView> {
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
-                                    kPrimaryColor.withOpacity(0.12),
-                                    kPrimaryColor.withOpacity(0.08),
+                                    kPrimaryColor.withValues(alpha: 0.12),
+                                    kPrimaryColor.withValues(alpha: 0.08),
                                   ],
                                 ),
                                 borderRadius: AppRadius.xsRadius,
                                 border: Border.all(
-                                  color: kPrimaryColor.withOpacity(0.2),
+                                  color: kPrimaryColor.withValues(alpha: 0.2),
                                   width: 0.5,
                                 ),
                               ),

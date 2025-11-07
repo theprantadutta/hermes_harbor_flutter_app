@@ -26,15 +26,15 @@ class EmptyWishlist extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.red.withOpacity(0.1),
-                    Colors.pink.withOpacity(0.05),
+                    Colors.red.withValues(alpha: 0.1),
+                    Colors.pink.withValues(alpha: 0.05),
                   ],
                 ),
               ),
               child: Icon(
                 Icons.favorite_border_rounded,
                 size: 80,
-                color: Colors.red.withOpacity(0.6),
+                color: Colors.red.withValues(alpha: 0.6),
               ),
             )
                 .animate(
@@ -113,7 +113,7 @@ class EmptyWishlist extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            kPrimaryColor.withOpacity(0.8),
+                            kPrimaryColor.withValues(alpha: 0.8),
                             kPrimaryColor,
                           ],
                         ),
@@ -147,7 +147,7 @@ class EmptyWishlist extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: AppRadius.mdRadius,
                         border: Border.all(
-                          color: kPrimaryColor.withOpacity(0.3),
+                          color: kPrimaryColor.withValues(alpha: 0.3),
                           width: 2,
                         ),
                       ),

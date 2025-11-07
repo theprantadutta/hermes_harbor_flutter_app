@@ -26,15 +26,15 @@ class EmptyCart extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    kPrimaryColor.withOpacity(0.1),
-                    kPrimaryColor.withOpacity(0.05),
+                    kPrimaryColor.withValues(alpha: 0.1),
+                    kPrimaryColor.withValues(alpha: 0.05),
                   ],
                 ),
               ),
               child: Icon(
                 Icons.shopping_cart_outlined,
                 size: 80,
-                color: kPrimaryColor.withOpacity(0.6),
+                color: kPrimaryColor.withValues(alpha: 0.6),
               ),
             )
                 .animate(
@@ -113,7 +113,7 @@ class EmptyCart extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            kPrimaryColor.withOpacity(0.8),
+                            kPrimaryColor.withValues(alpha: 0.8),
                             kPrimaryColor,
                           ],
                         ),
@@ -147,7 +147,7 @@ class EmptyCart extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: AppRadius.mdRadius,
                         border: Border.all(
-                          color: kPrimaryColor.withOpacity(0.3),
+                          color: kPrimaryColor.withValues(alpha: 0.3),
                           width: 2,
                         ),
                       ),

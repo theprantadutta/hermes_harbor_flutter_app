@@ -291,7 +291,7 @@ class AppAnimations {
         ShimmerEffect(
           duration: duration ?? const Duration(milliseconds: 1500),
           delay: delay ?? Duration.zero,
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.white.withValues(alpha: 0.5),
         ),
       ];
 

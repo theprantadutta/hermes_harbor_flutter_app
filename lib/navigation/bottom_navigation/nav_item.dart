@@ -57,8 +57,8 @@ class _NavItemState extends State<NavItem> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      kPrimaryColor.withOpacity(0.15),
-                      kPrimaryColor.withOpacity(0.08),
+                      kPrimaryColor.withValues(alpha: 0.15),
+                      kPrimaryColor.withValues(alpha: 0.08),
                     ],
                   )
                 : null,
@@ -66,7 +66,7 @@ class _NavItemState extends State<NavItem> {
             boxShadow: widget.isActive
                 ? [
                     BoxShadow(
-                      color: kPrimaryColor.withOpacity(0.1),
+                      color: kPrimaryColor.withValues(alpha: 0.1),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),

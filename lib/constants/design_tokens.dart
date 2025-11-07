@@ -75,7 +75,7 @@ class AppElevation {
   /// Subtle shadow for minimal elevation
   static List<BoxShadow> subtle(Color color) => [
         BoxShadow(
-          color: color.withOpacity(0.05),
+          color: color.withValues(alpha: 0.05),
           blurRadius: 4,
           offset: const Offset(0, 2),
         ),
@@ -84,12 +84,12 @@ class AppElevation {
   /// Low elevation shadow for cards and containers
   static List<BoxShadow> low(Color color) => [
         BoxShadow(
-          color: color.withOpacity(0.08),
+          color: color.withValues(alpha: 0.08),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
         BoxShadow(
-          color: color.withOpacity(0.04),
+          color: color.withValues(alpha: 0.04),
           blurRadius: 4,
           offset: const Offset(0, 1),
         ),
@@ -98,12 +98,12 @@ class AppElevation {
   /// Medium elevation for prominent cards
   static List<BoxShadow> medium(Color color) => [
         BoxShadow(
-          color: color.withOpacity(0.12),
+          color: color.withValues(alpha: 0.12),
           blurRadius: 16,
           offset: const Offset(0, 4),
         ),
         BoxShadow(
-          color: color.withOpacity(0.06),
+          color: color.withValues(alpha: 0.06),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
@@ -112,12 +112,12 @@ class AppElevation {
   /// High elevation for modals and floating elements
   static List<BoxShadow> high(Color color) => [
         BoxShadow(
-          color: color.withOpacity(0.15),
+          color: color.withValues(alpha: 0.15),
           blurRadius: 24,
           offset: const Offset(0, 8),
         ),
         BoxShadow(
-          color: color.withOpacity(0.08),
+          color: color.withValues(alpha: 0.08),
           blurRadius: 12,
           offset: const Offset(0, 4),
         ),
@@ -126,12 +126,12 @@ class AppElevation {
   /// Extra high elevation for major floating elements
   static List<BoxShadow> extraHigh(Color color) => [
         BoxShadow(
-          color: color.withOpacity(0.2),
+          color: color.withValues(alpha: 0.2),
           blurRadius: 40,
           offset: const Offset(0, 12),
         ),
         BoxShadow(
-          color: color.withOpacity(0.12),
+          color: color.withValues(alpha: 0.12),
           blurRadius: 20,
           offset: const Offset(0, 6),
         ),
@@ -140,12 +140,12 @@ class AppElevation {
   /// Glow effect for accent elements
   static List<BoxShadow> glow(Color color, {double intensity = 0.4}) => [
         BoxShadow(
-          color: color.withOpacity(intensity),
+          color: color.withValues(alpha: intensity),
           blurRadius: 20,
           spreadRadius: 2,
         ),
         BoxShadow(
-          color: color.withOpacity(intensity * 0.5),
+          color: color.withValues(alpha: intensity * 0.5),
           blurRadius: 40,
           spreadRadius: 4,
         ),
@@ -154,7 +154,7 @@ class AppElevation {
   /// Inner shadow effect (simulate with border)
   static List<BoxShadow> inner(Color color) => [
         BoxShadow(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           blurRadius: 4,
           offset: const Offset(0, 2),
           spreadRadius: -2,

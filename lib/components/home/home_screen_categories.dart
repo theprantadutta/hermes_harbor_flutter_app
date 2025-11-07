@@ -165,8 +165,8 @@ class _PremiumCategoryCardState extends State<PremiumCategoryCard> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        widget.category.color.withOpacity(0.9),
-                        widget.category.color.withOpacity(0.6),
+                        widget.category.color.withValues(alpha: 0.9),
+                        widget.category.color.withValues(alpha: 0.6),
                       ],
                     ),
                   ),
@@ -220,11 +220,11 @@ class _PremiumCategoryCardState extends State<PremiumCategoryCard> {
                       Container(
                         padding: EdgeInsets.all(AppSpacing.sm),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.25),
+                          color: Colors.white.withValues(alpha: 0.25),
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.white.withOpacity(0.3),
+                              color: Colors.white.withValues(alpha: 0.3),
                               blurRadius: 8,
                               spreadRadius: 2,
                             ),
@@ -247,7 +247,7 @@ class _PremiumCategoryCardState extends State<PremiumCategoryCard> {
                           letterSpacing: 1.2,
                           shadows: [
                             Shadow(
-                              color: Colors.black.withOpacity(0.4),
+                              color: Colors.black.withValues(alpha: 0.4),
                               blurRadius: 6,
                               offset: const Offset(2, 2),
                             ),

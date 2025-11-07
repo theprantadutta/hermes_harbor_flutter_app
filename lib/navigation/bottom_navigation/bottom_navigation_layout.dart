@@ -177,25 +177,25 @@ class _BottomNavigationLayoutState extends State<BottomNavigationLayout> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Colors.grey[900]!.withOpacity(0.9),
-                              Colors.grey[850]!.withOpacity(0.85),
+                              Colors.grey[900]!.withValues(alpha: 0.9),
+                              Colors.grey[850]!.withValues(alpha: 0.85),
                             ],
                           )
                         : LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Colors.white.withOpacity(0.95),
-                              Colors.white.withOpacity(0.9),
+                              Colors.white.withValues(alpha: 0.95),
+                              Colors.white.withValues(alpha: 0.9),
                             ],
                           ),
                     boxShadow: AppElevation.extraHigh(
-                      kPrimaryColor.withOpacity(0.15),
+                      kPrimaryColor.withValues(alpha: 0.15),
                     ),
                     border: Border.all(
                       color: isDarkTheme
-                          ? Colors.white.withOpacity(0.1)
-                          : kPrimaryColor.withOpacity(0.1),
+                          ? Colors.white.withValues(alpha: 0.1)
+                          : kPrimaryColor.withValues(alpha: 0.1),
                       width: 1,
                     ),
                   ),
